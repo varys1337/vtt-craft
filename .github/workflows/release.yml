@@ -1,0 +1,97 @@
+name: Build and publish release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Package VTT Craft and create GitHub release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Read and validate manifest
+        id: manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          MODULE_ID="$(node -p "require('./module.json').id || require('./module.json').name")"
+          VERSION="$(node -p "require('./module.json').version")"
+          TAG="v${VERSION}"
+
+          if [[ -z "${MODULE_ID}" || -z "${VERSION}" ]]; then
+            echo "::error::module.json must define id/name and version."
+            exit 1
+          fi
+
+          if [[ "${GITHUB_REF_TYPE}" == "tag" && "${GITHUB_REF_NAME}" != "${TAG}" ]]; then
+            echo "::error::Pushed tag ${GITHUB_REF_NAME} does not match module.json version ${VERSION}. Expected ${TAG}."
+            exit 1
+          fi
+
+          for required in module.json fonts images scripts styles; do
+            if [[ ! -e "${required}" ]]; then
+              echo "::error::Required package path is missing: ${required}"
+              exit 1
+            fi
+          done
+
+          if [[ ! -f "fonts/LifeCraft_Font.ttf" ]]; then
+            echo "::error::Missing fonts/LifeCraft_Font.ttf. Keep the existing font asset in the repository before releasing."
+            exit 1
+          fi
+
+          echo "module_id=${MODULE_ID}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Syntax-check module script
+        shell: bash
+        run: node --check scripts/vtt-craft.mjs
+
+      - name: Build Foundry module zip
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+          zip -qr "dist/${{ steps.manifest.outputs.module_id }}.zip" module.json fonts images scripts styles
+          cp module.json dist/module.json
+
+      - name: Stop if release already exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "${{ steps.manifest.outputs.tag }}" >/dev/null 2>&1; then
+            echo "::error::Release ${{ steps.manifest.outputs.tag }} already exists. Bump module.json version before creating another release."
+            exit 1
+          fi
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "${{ steps.manifest.outputs.tag }}" \
+            "dist/${{ steps.manifest.outputs.module_id }}.zip#${{ steps.manifest.outputs.module_id }}.zip" \
+            "dist/module.json#module.json" \
+            --target "${GITHUB_SHA}" \
+            --title "VTT Craft ${{ steps.manifest.outputs.tag }}" \
+            --notes "Automated Foundry VTT module release for VTT Craft ${{ steps.manifest.outputs.version }}." \
+            --latest

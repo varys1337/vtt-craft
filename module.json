@@ -1,15 +1,37 @@
 {
-	"name": "vtt-craft",
-	"title": "VTT Craft",
-	"description": "",
-	"version": "0.1.2",
-	"author": "Felix#6196",
-	"systems": ["dnd5e"],
-    "scripts": ["/wow-ui.js"],
-	"styles": ["/wow-ui.css"],
-	"packs": [],
-    "url": "https://github.com/syl3r86/preloader",
-    "manifest": "https://raw.githubusercontent.com/syl3r86/vtt-craft/master/module.json",
-    "download": "https://github.com/syl3r86/vtt-craft/archive/master.zip",
-    "minimumCoreVersion": "0.6.0"
+  "id": "vtt-craft",
+  "title": "VTT Craft",
+  "description": "A World of Warcraft-inspired UI skin for Foundry Virtual Tabletop v14.363. This clean rebuild preserves Foundry-owned sidebar/tab behavior, uses ApplicationV2-safe additive decoration, constrains core control scaling, keeps chat usable at UI/font scaling, and restores hotbar frame decorations without modifying assets.",
+  "version": "0.4.17",
+  "authors": [
+    {
+      "name": "Felix#6196"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14.363",
+    "verified": "14.363"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.3.3",
+          "verified": "5.3.3"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/vtt-craft.mjs"
+  ],
+  "styles": [
+    "styles/vtt-craft.css"
+  ],
+  "packs": [],
+  "url": "https://github.com/varys1337/vtt-craft",
+  "manifest": "https://raw.githubusercontent.com/varys1337/vtt-craft/master/module.json",
+  "download": "https://github.com/varys1337/vtt-craft/releases/latest/download/vtt-craft.zip"
 }
