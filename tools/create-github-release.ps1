@@ -35,26 +35,45 @@ try {
 
   node --check "scripts/vtt-craft.mjs" | Out-Host
 
-  if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
-  New-Item -ItemType Directory -Path $dist | Out-Null
-  Compress-Archive -Path @("module.json", "fonts", "images", "scripts", "styles") -DestinationPath $asset -Force
-  Copy-Item "module.json" (Join-Path $dist "module.json") -Force
-
   $dirty = git status --short
   if ($dirty) {
     throw "Working tree is not clean. Commit the upgrade first, then run this script. Current changes:`n$dirty"
   }
 
-  $existingRelease = gh release view $tag 2>$null
-  if ($LASTEXITCODE -eq 0) {
+  # Do not use `gh release view $tag` here. On the first release it correctly returns
+  # "release not found", but Windows PowerShell can treat that expected stderr output
+  # as a NativeCommandError when `$ErrorActionPreference` is Stop.
+  $releaseListOutput = & gh release list --limit 100 --json tagName 2>&1
+  $releaseListExitCode = $LASTEXITCODE
+  if ($releaseListExitCode -ne 0) {
+    throw "Unable to list GitHub releases. Check 'gh auth status' and repository access. gh output:`n$releaseListOutput"
+  }
+
+  $releases = @()
+  $releaseListText = ($releaseListOutput | Out-String).Trim()
+  if ($releaseListText) {
+    $parsedReleases = $releaseListText | ConvertFrom-Json
+    if ($parsedReleases) { $releases = @($parsedReleases) }
+  }
+
+  $existingRelease = $releases | Where-Object { $_.tagName -eq $tag } | Select-Object -First 1
+  if ($existingRelease) {
     throw "GitHub release $tag already exists. Bump module.json version before creating another release."
   }
 
+  if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
+  New-Item -ItemType Directory -Path $dist | Out-Null
+  Compress-Archive -Path @("module.json", "fonts", "images", "scripts", "styles") -DestinationPath $asset -Force
+  Copy-Item "module.json" (Join-Path $dist "module.json") -Force
+
   if (-not $SkipPush) {
     git push origin HEAD
-    $existingTag = git tag --list $tag
-    if (-not $existingTag) { git tag $tag }
-    git push origin $tag
+
+    $existingLocalTag = git tag --list $tag
+    if (-not $existingLocalTag) { git tag $tag }
+
+    $existingRemoteTag = git ls-remote --tags origin "refs/tags/$tag"
+    if (-not $existingRemoteTag) { git push origin $tag }
   }
 
   $args = @(
