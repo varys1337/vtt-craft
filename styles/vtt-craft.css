@@ -5,7 +5,7 @@
 }
 
 /* ==========================================================================
-   VTT Craft clean rebuild for Foundry VTT v14.363
+   VTT Craft skin for Foundry VTT v14.368+
    --------------------------------------------------------------------------
    The module is intentionally additive:
    - Foundry owns sidebar tab switching and directory layout.
@@ -23,36 +23,40 @@
   --vtt-craft-text-gold: #c4a619;
   --vtt-craft-text-light: #f1eadc;
   --vtt-craft-text-dark: #241f18;
+  --vtt-craft-paper-secondary: #302219;
+  --vtt-craft-paper-tertiary: #34271c;
   --vtt-craft-pill-bg: rgba(70, 54, 35, 0.9);
   --vtt-craft-pill-bg-active: rgba(106, 83, 40, 0.96);
   --vtt-craft-pill-border-color: #b49a5f;
   --vtt-craft-pill-text: #f1eadc;
   --vtt-craft-pill-text-active: #fff7c8;
-  --vtt-craft-frame-width: 18px;
+  --vtt-craft-frame-width: 12px;
   --vtt-craft-frame-image: url("../images/frames/border_frame_neutral.webp");
   --vtt-craft-frame-slice: 40;
   --vtt-craft-body-frame-backing: url("../images/frames/52bcf849-96d8-45cb-84fb-59fa010331db.webp");
-  --vtt-craft-body-frame-layer: var(--vtt-craft-body-frame-backing) center / 100% 100% no-repeat;
   --vtt-craft-sidebar-frame-width: var(--vtt-craft-frame-width);
   --vtt-craft-sidebar-frame-slice: var(--vtt-craft-frame-slice);
   --vtt-craft-sidebar-frame-repeat: stretch;
   --vtt-craft-header-frame-image: url("../images/frames/neutral_header.webp");
   --vtt-craft-header-frame-slice: 15;
   --vtt-craft-window-texture: url("../images/backgrounds/neutral_background.webp");
-  --vtt-craft-window-texture-size: min(520px, 56vw);
+  --vtt-craft-window-texture-size: 256px;
   --vtt-craft-window-texture-position: center top;
   --vtt-craft-window-texture-repeat: repeat;
   --vtt-craft-window-texture-alpha: rgba(0, 0, 0, 0.12);
   --vtt-craft-window-texture-softener: linear-gradient(var(--vtt-craft-window-texture-alpha), var(--vtt-craft-window-texture-alpha));
   --vtt-craft-window-texture-layer: var(--vtt-craft-window-texture-softener), var(--vtt-craft-window-texture) var(--vtt-craft-window-texture-position) / var(--vtt-craft-window-texture-size) var(--vtt-craft-window-texture-repeat);
-  --vtt-craft-framed-surface-background: var(--vtt-craft-body-frame-layer), var(--vtt-craft-window-texture-layer);
-  --vtt-craft-framed-surface-background-origin: border-box, padding-box, padding-box;
-  --vtt-craft-framed-surface-background-clip: border-box, padding-box, padding-box;
+  --vtt-craft-framed-surface-background: var(--vtt-craft-window-texture-layer);
+  --vtt-craft-framed-surface-background-origin: padding-box;
+  --vtt-craft-framed-surface-background-clip: padding-box;
   --vtt-craft-window-texture-overlay: rgba(0, 0, 0, 0.52);
   --vtt-craft-chrome-overlay: rgba(6, 7, 10, 0.82);
   --vtt-craft-sidebar-panel-overlay: rgba(0, 0, 0, 0.28);
   --vtt-craft-sidebar-row-hover: rgba(92, 77, 16, 0.58);
   --vtt-craft-parchment: url("../images/backgrounds/parchment.webp");
+  /* The deep top shading belongs in the painted rim, outside the text area. */
+  --vtt-craft-parchment-slice: 240 96 96;
+  --vtt-craft-parchment-filter: none;
   --vtt-craft-border-trim: url("../images/border.webp");
   --vtt-craft-button-image: url("../images/buttons/button_med_alt.webp");
   --vtt-craft-button-image-hover: url("../images/buttons/button_med_alt_highlight.webp");
@@ -60,6 +64,17 @@
   --vtt-craft-small-button-image-hover: url("../images/buttons/button_med_alt_highlight.webp");
   --vtt-craft-button-slice: 11;
   --vtt-craft-small-button-slice: 11;
+  --vtt-craft-action-size: 32px;
+  --vtt-craft-action-size-compact: 28px;
+  --vtt-craft-action-border: 3px;
+  --vtt-craft-action-padding: 4px 8px;
+  --vtt-craft-action-padding-compact: 2px 6px;
+  --vtt-craft-form-gap: 8px;
+  --vtt-craft-field-background: #252830;
+  --vtt-craft-field-border: #74664b;
+  --vtt-craft-field-placeholder: #bcb8b0;
+  --vtt-craft-focus-light: #f1eadc;
+  --vtt-craft-focus-dark: #181820;
   --vtt-craft-square-button: url("../images/buttons/sidebar_top_btn.webp");
   --vtt-craft-hotbar-button: url("../images/buttons/hotbar_bg.webp");
   --vtt-craft-close-button: url("../images/buttons/button_close.webp");
@@ -67,7 +82,20 @@
   --vtt-craft-griffon: url("../images/griffon_cap.webp");
   --vtt-craft-control-size: clamp(32px, var(--control-size, 36px), 42px);
   --vtt-craft-control-icon-size: clamp(16px, calc(var(--vtt-craft-control-size) * 0.54), 22px);
-  --vtt-craft-chat-toolbar-button-size: 32px;
+  --vtt-craft-chat-inset: 8px;
+  --vtt-craft-chat-gap: 4px;
+  --vtt-craft-chat-rail: 12px;
+  --vtt-craft-chat-panel-frame: 0px;
+  --vtt-craft-chat-panel-clearance: 4px;
+  --vtt-craft-chat-panel-inset: calc(var(--vtt-craft-chat-panel-frame) + var(--vtt-craft-chat-panel-clearance));
+  --vtt-craft-chat-panel-background: none;
+  --vtt-craft-chat-panel-fill: transparent;
+}
+
+:is(body, .vtt).vtt-craft-active.vtt-craft-chat-background {
+  --vtt-craft-chat-panel-frame: 6px;
+  --vtt-craft-chat-panel-background: var(--vtt-craft-window-texture-layer);
+  --vtt-craft-chat-panel-fill: var(--vtt-craft-sidebar-panel-overlay);
 }
 
 :is(body, .vtt).vtt-craft-active.wow-horde {
@@ -122,10 +150,14 @@
 
 :is(body, .vtt).vtt-craft-active.vtt-craft-parchment-parchment2 {
   --vtt-craft-parchment: url("../images/backgrounds/parchment2.webp");
+  --vtt-craft-parchment-slice: 80;
+  --vtt-craft-parchment-filter: contrast(0.35) brightness(1.6) saturate(0.75);
 }
 
 :is(body, .vtt).vtt-craft-active.vtt-craft-parchment-parchment3 {
   --vtt-craft-parchment: url("../images/backgrounds/parchment3.webp");
+  --vtt-craft-parchment-slice: 128;
+  --vtt-craft-parchment-filter: contrast(0.45) brightness(1.5) saturate(0.75);
 }
 
 :is(body, .vtt).vtt-craft-active.vtt-craft-cursor-human {
@@ -148,71 +180,30 @@
   --vtt-craft-cursor-active: url("../images/cursors/Pointer_undead2_32x32.webp") 2 2;
 }
 
-:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead),
-:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(*, #interface, #board, #canvas, canvas, .canvas-container, .application, .app, .window-app, dialog, #sidebar, #hotbar, #players) {
-  cursor: var(--vtt-craft-cursor-passive), auto !important;
+:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) {
+  cursor: var(--vtt-craft-cursor-passive), auto;
 }
 
-:is(body, .vtt).vtt-craft-active.vtt-craft-cursor-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead),
-:is(body, .vtt).vtt-craft-active.vtt-craft-cursor-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(*, #interface, #board, #canvas, canvas, .canvas-container, .application, .app, .window-app, dialog, #sidebar, #hotbar, #players) {
+:is(body, .vtt).vtt-craft-active.vtt-craft-cursor-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(button, a[href], .button, select, input:is([type="button"], [type="submit"], [type="reset"], [type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"]), [role="button"], [role="tab"], [role="menuitem"], [data-action], [data-control], [data-tool], [data-link], summary, label[for], .rollable, .item-control, .item-action, .effect-control, .activity-control, .document-control, #sidebar .directory-item, #sidebar .folder, #sidebar .combatant):not(:disabled):not([disabled]):not([aria-disabled="true"]),
+:is(body, .vtt).vtt-craft-active.vtt-craft-cursor-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) .vtt-craft-canvas-cursor {
   cursor: var(--vtt-craft-cursor-active), pointer !important;
 }
 
-:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(input:not([type="button"]):not([type="submit"]):not([type="reset"]), textarea, [contenteditable="true"], .editor, .prosemirror, .tox, .tox-edit-area, .tox-edit-area *, .ProseMirror, .ProseMirror *) {
+:is(body, .vtt).vtt-craft-active:not(.vtt-craft-cursor-active):is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) .vtt-craft-canvas-cursor {
+  cursor: var(--vtt-craft-cursor-passive), auto !important;
+}
+
+:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="hidden"]), textarea, [contenteditable="true"], .editor-content, .tox-edit-area, .ProseMirror, .cm-content) {
   cursor: text !important;
+}
+
+:is(body, .vtt).vtt-craft-active:is(.vtt-craft-cursor-human, .vtt-craft-cursor-nightelf, .vtt-craft-cursor-orc, .vtt-craft-cursor-undead) :is(:disabled, [disabled], [aria-disabled="true"], [aria-disabled="true"] *, [inert], [inert] *) {
+  cursor: default !important;
 }
 
 /* --------------------------------------------------------------------------
    Icon safety
    -------------------------------------------------------------------------- */
-
-body.vtt-craft-active :is(i, span):is(.fa, .fas, .far, .fal, .fat, .fad, .fab, .fa-solid, .fa-regular, .fa-light, .fa-thin, .fa-duotone, .fa-brands, [class^="fa-"], [class*=" fa-"]) {
-  font-family: var(--font-awesome, "Font Awesome 6 Pro", "Font Awesome 6 Free", "Font Awesome 5 Free") !important;
-  font-style: normal !important;
-  font-variant: normal !important;
-  line-height: 1 !important;
-  letter-spacing: normal !important;
-  text-rendering: auto !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-active :is(i, span):is(.far, .fa-regular) { font-weight: 400 !important; }
-body.vtt-craft-active :is(i, span):is(.fas, .fa, .fa-solid) { font-weight: 900 !important; }
-body.vtt-craft-active :is(i, span):is(.fab, .fa-brands) {
-  font-family: var(--font-awesome-brands, "Font Awesome 6 Brands", "Font Awesome 5 Brands") !important;
-  font-weight: 400 !important;
-}
-
-body.vtt-craft-active :is(button.icon, a.button.icon, .ui-control.icon, .hotbar-page-control, .page-control, .page-prev, .page-next),
-body.vtt-craft-active :is(button.icon, a.button.icon, .ui-control.icon, .hotbar-page-control, .page-control, .page-prev, .page-next)::before,
-body.vtt-craft-active :is(button.icon, a.button.icon, .ui-control.icon, .hotbar-page-control, .page-control, .page-prev, .page-next)::after {
-  font-family: var(--font-awesome, "Font Awesome 6 Pro", "Font Awesome 6 Free", "Font Awesome 5 Free") !important;
-  font-style: normal !important;
-  font-variant: normal !important;
-  font-weight: 900 !important;
-  letter-spacing: normal !important;
-  text-rendering: auto !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-active :is(button.icon.fa-duotone, a.button.icon.fa-duotone, .ui-control.icon.fa-duotone),
-body.vtt-craft-active :is(button.icon.fa-duotone, a.button.icon.fa-duotone, .ui-control.icon.fa-duotone)::before,
-body.vtt-craft-active :is(button.icon.fa-duotone, a.button.icon.fa-duotone, .ui-control.icon.fa-duotone)::after {
-  font-family: var(--font-awesome-duotone, "Font Awesome 6 Duotone", "Font Awesome 6 Pro") !important;
-}
-
-body.vtt-craft-active :is(.fa-stack, .ui-control.fa-stack) {
-  font-size: 0.5em !important;
-}
-
-body.vtt-craft-active :is(.fa-stack, .ui-control.fa-stack) > i {
-  line-height: 2em !important;
-}
-
-body.vtt-craft-active :is(svg, img, foundry-icon, dnd5e-icon) {
-  color: currentColor;
-  fill: currentColor;
-}
 
 /* --------------------------------------------------------------------------
    Reusable legacy classes retained for compatibility with old content/macros
@@ -269,9 +260,9 @@ body.vtt-craft-active :is(svg, img, foundry-icon, dnd5e-icon) {
    Non-document applications and dialogs
    -------------------------------------------------------------------------- */
 
-body.vtt-craft-active :is(.application, .app, .window-app, dialog):not(#sidebar):not(#players):not(#hotbar):not(#navigation):not(#scene-navigation):not(#controls):not(#scene-controls):not(#pause):not(#ui-left):not(#ui-top):not(#ui-bottom):not(#ui-right):not(.vtt-craft-core-ui):not(.vtt-craft-document-sheet):not(.dnd5e2) {
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame):is(:not(.minimized, .minimizing, .maximizing), .vtt-craft-dialog:not(.minimized)) {
   border: var(--vtt-craft-frame-width) solid transparent;
-  border-image: var(--vtt-craft-frame-image) var(--vtt-craft-frame-slice) repeat;
+  border-image: var(--vtt-craft-body-frame-backing) 160 stretch;
   background: var(--vtt-craft-framed-surface-background);
   background-origin: var(--vtt-craft-framed-surface-background-origin);
   background-color: rgba(6, 7, 10, 0.92);
@@ -280,108 +271,328 @@ body.vtt-craft-active :is(.application, .app, .window-app, dialog):not(#sidebar)
   box-sizing: border-box;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):not(.vtt-craft-core-ui):not(.vtt-craft-document-sheet):not(.dnd5e2) > .window-header {
-  min-height: var(--header-height, 30px);
-  border: 7px solid transparent;
-  border-image: var(--vtt-craft-header-frame-image) var(--vtt-craft-header-frame-slice) fill stretch;
+/* One compact frame for ordinary apps, dialogs and document sheets. Native
+   minimized geometry stays in charge; dialogs retain their frame during close. */
+
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui):not(.dnd5e2):not(.vtt-craft-uesrpg-frame):is(:not(.minimized, .minimizing, .maximizing), .vtt-craft-dialog:not(.minimized)) > .window-header {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  min-block-size: var(--header-height, 30px);
+  block-size: auto;
+  padding: 6px 8px;
+  border: 0;
+  border-image: none;
   background: var(--vtt-craft-window-texture-layer);
-  background-color: rgba(0, 0, 0, 0.35);
   color: var(--vtt-craft-text-gold);
-  box-shadow: none;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):not(.vtt-craft-core-ui):not(.vtt-craft-document-sheet):not(.dnd5e2) > .window-content {
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui):not(.dnd5e2):not(.vtt-craft-uesrpg-frame) > .window-header .window-title {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  font-size: var(--font-size-14, 14px);
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui):not(.dnd5e2):not(.vtt-craft-uesrpg-frame) > .window-header :is(.window-icon, .header-control, .window-controls) { flex: 0 0 auto; }
+
+/* Readable neutral text and fields on the dark chrome in either client palette.
+   Native menus and rich-text editor surfaces continue to use their own tokens. */
+
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui) {
+  --vtt-craft-app-native-primary: var(--color-text-primary);
+  --vtt-craft-app-native-secondary: var(--color-text-secondary);
+  --vtt-craft-app-native-tertiary: var(--color-text-tertiary);
+  --vtt-craft-app-native-emphatic: var(--color-text-emphatic);
+  --vtt-craft-app-native-subtle: var(--color-text-subtle);
+  --vtt-craft-app-native-link: var(--color-text-hyperlink);
+  --vtt-craft-app-native-input-background: var(--input-background-color);
+  --vtt-craft-app-native-input-text: var(--input-text-color);
+  --vtt-craft-app-native-input-placeholder: var(--input-placeholder-color);
+  --vtt-craft-app-native-form-label: var(--color-form-label);
+  --vtt-craft-app-native-form-hint: var(--color-form-hint);
+}
+
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui):not(.dnd5e2):not(.vtt-craft-uesrpg-frame) > .window-content {
+  --color-text-primary: var(--vtt-craft-text-light);
+  --color-text-emphatic: var(--vtt-craft-text-light);
+  --color-text-secondary: #bcb8b0;
+  --color-text-tertiary: #bcb8b0;
+  --color-text-subtle: #bcb8b0;
+  --input-background-color: var(--vtt-craft-field-background);
+  --input-text-color: var(--vtt-craft-text-light);
+  --input-placeholder-color: var(--vtt-craft-field-placeholder);
+  color-scheme: dark;
   background: transparent;
   color: var(--vtt-craft-text-light);
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):not(.vtt-craft-core-ui):not(.vtt-craft-document-sheet):not(.dnd5e2) :is(button, .button):not(.unbutton):not(.tox-tbtn):not(.tox-mbtn):not(.header-control) {
-  min-height: 28px;
-  padding: 0 8px;
-  border: 6px solid transparent;
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui) :is(.editor-menu, .menu-container, .context-menu, [popover]) {
+  --color-text-primary: var(--vtt-craft-app-native-primary);
+  --color-text-secondary: var(--vtt-craft-app-native-secondary);
+  --color-text-tertiary: var(--vtt-craft-app-native-tertiary);
+  --color-text-emphatic: var(--vtt-craft-app-native-emphatic);
+  --color-text-subtle: var(--vtt-craft-app-native-subtle);
+  --color-text-hyperlink: var(--vtt-craft-app-native-link);
+  --input-background-color: var(--vtt-craft-app-native-input-background);
+  --input-text-color: var(--vtt-craft-app-native-input-text);
+  --input-placeholder-color: var(--vtt-craft-app-native-input-placeholder);
+  --color-form-label: var(--vtt-craft-app-native-form-label);
+  --color-form-hint: var(--vtt-craft-app-native-form-hint);
+  color: var(--color-text-primary);
+  text-shadow: none;
+}
+
+/* Ordinary forms share a readable dark palette. UESRPG keeps its native
+   parchment fields; custom widgets, document interiors and editors stay native. */
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) > .window-content {
+  --color-form-label: var(--vtt-craft-text-light);
+  --color-form-hint: var(--vtt-craft-field-placeholder);
+  --input-background-color: var(--vtt-craft-field-background);
+  --input-text-color: var(--vtt-craft-text-light);
+  --input-placeholder-color: var(--vtt-craft-field-placeholder);
+  color-scheme: dark;
+  font-family: var(--vtt-craft-font-body);
+  text-shadow: none;
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) :is(input:not([type="hidden"], [type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="submit"], [type="button"], [type="reset"], [is]), select, textarea):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *):not(:disabled, [disabled], [aria-disabled="true"], [readonly], [aria-invalid="true"], :invalid, .invalid, .error, .warning, .success) {
+  background-color: var(--vtt-craft-field-background);
+  border-color: var(--vtt-craft-field-border);
+  color: var(--vtt-craft-text-light);
+  text-shadow: none;
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) :is(input:not([type="hidden"], [type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="submit"], [type="button"], [type="reset"], [is]), select, textarea):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *)::placeholder {
+  color: var(--vtt-craft-field-placeholder);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) :is(input:not([type="hidden"], [type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="submit"], [type="button"], [type="reset"], [is]), select):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *):not(.slim, .compact):not(:where(.slim, .compact) *) {
+  box-sizing: border-box;
+  min-block-size: var(--vtt-craft-action-size);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) :is(.hint, .notes):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *):not(.warning, .error, .success) {
+  color: var(--color-form-hint);
+  text-shadow: none;
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) fieldset:not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *):not(.warning, .error, .success) {
+  min-inline-size: 0;
+  border-color: var(--vtt-craft-field-border);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame),
+  .dnd5e2.vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame)
+) :is(.form-group > label, fieldset > legend):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *):not(.warning, .error, .success) {
+  color: var(--color-form-label);
+  text-shadow: none;
+}
+
+/* Adjust the rhythm of ordinary forms without replacing their flex/grid layout. */
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(form, .dialog-content, .form-fields):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, .split-button, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .vtt-craft-document-sheet) *) {
+  gap: var(--vtt-craft-form-gap);
+}
+
+/* One action treatment; adapters add targets, not competing button declarations.
+   Native display/visibility and grouped/editor/icon controls remain authoritative. */
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *) {
+  box-sizing: border-box;
+  min-block-size: var(--vtt-craft-action-size);
+  block-size: auto;
+  padding: 4px var(--vtt-craft-action-padding-inline, 8px);
+  border: var(--vtt-craft-action-border) solid transparent;
   border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch;
   border-radius: 0;
   background: none;
   color: var(--vtt-craft-text-gold);
   font-family: var(--vtt-craft-font-body);
-  font-size: var(--font-size-12, 12px);
+  font-size: var(--vtt-craft-action-font-size, var(--font-size-14, 14px));
   font-weight: 700;
-  line-height: 16px;
+  line-height: 1.25;
   letter-spacing: normal;
-  text-shadow: 1px 1px 2px #000;
+  text-transform: none;
+  white-space: var(--vtt-craft-action-white-space, normal);
+  overflow-wrap: var(--vtt-craft-action-overflow-wrap, normal);
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-shadow: 0 1px 2px #000;
   box-shadow: none;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):not(.vtt-craft-core-ui):not(.vtt-craft-document-sheet):not(.dnd5e2) :is(button, .button):not(.unbutton):not(.tox-tbtn):not(.tox-mbtn):not(.header-control):hover {
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is([autofocus], .default):not(:disabled, [disabled], [aria-disabled="true"], [inert]):not(:where([aria-disabled="true"], [inert]) *) {
+  box-shadow: inset 0 0 0 1px var(--vtt-craft-pill-border-color);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is(.small, .compact):not(.vtt-craft-sized-action) {
+  min-block-size: var(--vtt-craft-action-size-compact);
+  padding: var(--vtt-craft-action-padding-compact);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is(:hover, :focus, :focus-visible):not(:disabled, [disabled], [aria-disabled="true"], [inert]):not(:where([aria-disabled="true"], [inert]) *) {
   border-image-source: var(--vtt-craft-small-button-image-hover);
-  color: var(--vtt-craft-accent-strong);
+  color: var(--vtt-craft-pill-text-active);
   box-shadow: 0 0 5px var(--vtt-craft-accent);
 }
 
-body.vtt-craft-active :is(.tox, prose-mirror, .prosemirror, .editor, .editor-menu, .editor-content) :is(button, [role="button"]) {
-  font-family: var(--vtt-craft-font-body) !important;
-  letter-spacing: normal !important;
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is(:active, .active, [aria-pressed="true"], [aria-selected="true"]):not(:disabled, [disabled], [aria-disabled="true"], [inert]):not(:where([aria-disabled="true"], [inert]) *) {
+  border-image-source: var(--vtt-craft-small-button-image-hover);
+  color: var(--vtt-craft-pill-text-active);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 0 0 3px var(--vtt-craft-accent);
+}
+
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is(:disabled, [disabled], [aria-disabled="true"], [inert]),
+body.vtt-craft-active :is(
+  .vtt-craft-application:not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .dnd5e2, .vtt-craft-uesrpg-frame) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-uesrpg-frame:is(.uesrpg-dialog, .uesrpg-resource-dialog, .uesrpg-attack-declare, .uesrpg-social-selector):not(.vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer, .social-selector-footer) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]),
+  .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]),
+  .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"])
+):not(:where(.icon, .unbutton, .header-control, .ui-control, .control-button, .config-button, .radio-button, .split-control, .tox-tbtn, .tox-mbtn, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet)):not(:where(.editor-menu, .menu-container, .context-menu, [popover], prose-mirror, .ProseMirror, .tox, range-picker, double-range-picker, color-picker, file-picker, number-field, multi-select, .split-button, .split-buttons, .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-actor-sheet, .vtt-craft-item-sheet) *):is(:where([aria-disabled="true"], [inert]) *) {
+  color: var(--vtt-craft-field-placeholder);
+  text-shadow: none;
+  box-shadow: none;
 }
 
 /* --------------------------------------------------------------------------
    Document sheets and roll dialogs
    -------------------------------------------------------------------------- */
 
-body.vtt-craft-active :is(.application, .app, .window-app, dialog):is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet, .vtt-craft-journal-sheet, .vtt-craft-rolltable-sheet, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui) {
-  border: var(--vtt-craft-frame-width) solid transparent;
-  border-image: var(--vtt-craft-frame-image) var(--vtt-craft-frame-slice) repeat;
-  background: var(--vtt-craft-framed-surface-background);
-  background-origin: var(--vtt-craft-framed-surface-background-origin);
-  background-color: var(--vtt-craft-chrome-overlay);
-  background-clip: var(--vtt-craft-framed-surface-background-clip);
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.85);
-  box-sizing: border-box;
-}
-
-body.vtt-craft-active :is(.application, .app, .window-app):is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet, .vtt-craft-journal-sheet, .vtt-craft-rolltable-sheet, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui) > .window-header {
-  min-height: var(--header-height, 30px);
-  border: 7px solid transparent;
-  border-image: var(--vtt-craft-header-frame-image) var(--vtt-craft-header-frame-slice) fill stretch;
-  background: var(--vtt-craft-window-texture-layer);
-  background-color: rgba(0, 0, 0, 0.35);
-  color: var(--vtt-craft-text-gold);
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-body.vtt-craft-active :is(.application, .app, .window-app):is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet, .vtt-craft-journal-sheet, .vtt-craft-rolltable-sheet, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui) > .window-content {
+body.vtt-craft-active :is(.application, .app, .window-app):is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet, .vtt-craft-journal-sheet, .vtt-craft-rolltable-sheet, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content {
   box-sizing: border-box;
   min-block-size: 0;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):is(.dnd5e2.vtt-craft-actor-sheet, .dnd5e2.vtt-craft-item-sheet, .dnd5e2.vtt-craft-journal-sheet, .dnd5e2.vtt-craft-rolltable-sheet, .dnd5e2.vtt-craft-roll-dialog):not(.vtt-craft-core-ui) {
+body.vtt-craft-active .dnd5e2.vtt-craft-application:not(.vtt-craft-core-ui) {
   --dnd5e-window-header-background: transparent;
   --dnd5e-application-background: var(--vtt-craft-framed-surface-background), var(--vtt-craft-chrome-overlay);
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app):is(.dnd5e2.vtt-craft-actor-sheet, .dnd5e2.vtt-craft-item-sheet, .dnd5e2.vtt-craft-journal-sheet, .dnd5e2.vtt-craft-rolltable-sheet, .dnd5e2.vtt-craft-roll-dialog):not(.vtt-craft-core-ui) > .window-content {
+body.vtt-craft-active .dnd5e2.vtt-craft-application:not(.vtt-craft-core-ui) > .window-content {
   background-clip: padding-box;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app, dialog).vtt-craft-roll-dialog:not(.vtt-craft-core-ui) {
+/* Sheet artwork has a fixed visual scale. Reuse the backing's ornament as a
+   nine-slice frame, without stretching its center beneath the sheet contents. */
+body.vtt-craft-active :is(.application, .app, .window-app):is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) {
+  --vtt-craft-window-texture-size: 256px;
+  /* Rebind here: inherited custom properties resolve against their parent. */
+  --vtt-craft-window-texture-layer: var(--vtt-craft-window-texture-softener), var(--vtt-craft-window-texture) var(--vtt-craft-window-texture-position) / var(--vtt-craft-window-texture-size) var(--vtt-craft-window-texture-repeat);
+  --vtt-craft-framed-surface-background: var(--vtt-craft-window-texture-layer);
+  --vtt-craft-framed-surface-background-origin: padding-box;
+  --vtt-craft-framed-surface-background-clip: padding-box;
+}
+
+body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui):not(:is(.minimized, .minimizing, .maximizing)) {
+  border: 24px solid transparent;
+  border-image: var(--vtt-craft-body-frame-backing) 160 stretch;
+}
+
+/* Native minimized geometry must not inherit the expanded sheet's 24px rim. */
+body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui):is(.minimized, .minimizing, .maximizing) {
+  border: var(--dnd5e-border-gold);
+  border-image: none;
+}
+
+body.vtt-craft-active :is(.application, .app, .window-app, dialog).vtt-craft-roll-dialog:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) {
   color: var(--vtt-craft-text-light);
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-roll-dialog:not(.vtt-craft-core-ui) > .window-content {
+body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-roll-dialog:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content {
   background: transparent;
 }
 
 body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description {
   box-sizing: border-box;
-  border: 10px solid transparent;
-  border-image-source: var(--vtt-craft-parchment);
-  border-image-slice: 30 fill;
-  border-image-repeat: stretch;
+  position: relative;
+  isolation: isolate;
+  border: 6px solid transparent;
+  border-image: none;
   border-radius: 0;
-  background: transparent var(--vtt-craft-parchment) center / 100% 100% no-repeat;
+  background: none;
   color: var(--vtt-craft-text-dark);
   text-shadow: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
+}
+
+/* Paint one paper behind content. Filtering this layer leaves text, icons and
+   editor controls untouched and avoids an opaque panel over the artwork. */
+body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  z-index: -1;
+  box-sizing: border-box;
+  border: 6px solid transparent;
+  border-image: var(--vtt-craft-parchment) var(--vtt-craft-parchment-slice) fill stretch;
+  filter: var(--vtt-craft-parchment-filter);
+  pointer-events: none;
 }
 
 body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description > .header {
@@ -403,65 +614,235 @@ body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .descripti
   text-shadow: none;
 }
 
-body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description :is(.editor, .editor-content, prose-mirror, .prosemirror, .ProseMirror) {
-  color: var(--vtt-craft-text-dark);
+/* Paper content gets a readable palette at its boundary. Editor menus keep
+   their native palette; authored colors and broken-link cues remain intact. */
+body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description :is(.editor-content, .ProseMirror) {
+  --color-text-primary: var(--vtt-craft-text-dark);
+  --color-text-secondary: var(--vtt-craft-paper-secondary);
+  --color-text-tertiary: var(--vtt-craft-paper-tertiary);
+  --color-text-emphatic: var(--vtt-craft-text-dark);
+  --color-text-hyperlink: var(--vtt-craft-paper-secondary);
+  --dnd5e-roll-icon-filter: none;
+  color: var(--color-text-primary);
   background: transparent;
   text-shadow: none;
 }
 
-body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet .item-descriptions .description :is(p, span, div, li, td, th, label, small, em, strong, h1, h2, h3, h4, h5, h6):not(.fa):not(.fas):not(.far):not(.fab):not([class^="fa-"]):not([class*=" fa-"]) {
-  color: var(--vtt-craft-text-dark);
+/* These native item sections sit directly on the dark sheet texture. Give
+   neutral labels readable tokens without repainting native cards or paper. */
+body.vtt-craft-active .dnd5e2.vtt-craft-item-sheet :is(.info-block, .single-description > .editor-content, .single-description > prose-mirror) {
+  --color-text-primary: var(--vtt-craft-text-light);
+  --color-text-emphatic: var(--vtt-craft-text-light);
+  --color-text-secondary: #bcb8b0;
+  --color-text-tertiary: #bcb8b0;
+  --color-text-hyperlink: var(--vtt-craft-text-light);
+  --dnd5e-roll-icon-filter: invert(1);
+  color: var(--color-text-primary);
+  text-shadow: 0 1px 2px #000;
+}
+
+/* Restore the textured journal treatment. A dark veil softens the faction
+   artwork beneath navigation text; reading pages keep their native texture.
+   UESRPG custom journals retain their complete native presentation. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) {
+  --vtt-craft-journal-navigation-veil: rgba(6, 7, 10, 0.7);
+  --vtt-craft-journal-text: #f1eadc;
+  --vtt-craft-journal-muted: #d2c7b4;
+  --vtt-craft-journal-reading-text: #f1eadc;
+  --vtt-craft-journal-reading-muted: #c8bda7;
+  --vtt-craft-journal-reading-heading: #fff3dc;
+  --vtt-craft-journal-border: #5d574d;
+  --vtt-craft-journal-broken-link: #f2a39f;
+  --vtt-craft-journal-link: color-mix(in srgb, var(--vtt-craft-accent-strong) 45%, var(--vtt-craft-text-light));
+  --vtt-craft-journal-reading-link: var(--vtt-craft-journal-link);
+  --vtt-craft-journal-code-background: #1b1d22;
+  --vtt-craft-journal-code-border: #75664f;
+  --vtt-craft-journal-page-background: #151316 url("../../../ui/denim075.png") repeat;
+  --vtt-craft-journal-hover: color-mix(in srgb, var(--vtt-craft-accent-strong) 12%, transparent);
+  --vtt-craft-journal-current: color-mix(in srgb, var(--vtt-craft-accent-strong) 20%, transparent);
+  --vtt-craft-journal-native-accent: var(--color-text-accent);
+  --vtt-craft-journal-native-form-label-hover: var(--color-form-label-hover, var(--color-form-label));
+  --vtt-craft-journal-editor-background: var(--color-cool-4, #30323a);
+}
+
+body.vtt-craft-active.theme-light .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame),
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet).theme-light:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) {
+  --vtt-craft-journal-editor-background: var(--color-light-2, #ece9e0);
+  --vtt-craft-journal-reading-text: #2b241b;
+  --vtt-craft-journal-reading-muted: #514532;
+  --vtt-craft-journal-reading-heading: #211a12;
+  --vtt-craft-journal-reading-link: #7c3024;
+  --vtt-craft-journal-broken-link: #8c2435;
+  --vtt-craft-journal-code-background: #efe4cf;
+  --vtt-craft-journal-code-border: #8b795e;
+  --vtt-craft-journal-page-background: #eee5d4 url("../../../ui/parchment.jpg") repeat;
+}
+
+/* An application palette takes precedence over the client's light palette. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet).theme-dark:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) {
+  --vtt-craft-journal-editor-background: var(--color-cool-4, #30323a);
+  --vtt-craft-journal-reading-text: #f1eadc;
+  --vtt-craft-journal-reading-muted: #c8bda7;
+  --vtt-craft-journal-reading-heading: #fff3dc;
+  --vtt-craft-journal-reading-link: var(--vtt-craft-journal-link);
+  --vtt-craft-journal-broken-link: #f2a39f;
+  --vtt-craft-journal-code-background: #1b1d22;
+  --vtt-craft-journal-code-border: #75664f;
+  --vtt-craft-journal-page-background: #151316 url("../../../ui/denim075.png") repeat;
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) {
+  --color-text-primary: var(--vtt-craft-journal-text);
+  --color-text-emphatic: var(--vtt-craft-journal-text);
+  --color-text-secondary: var(--vtt-craft-journal-muted);
+  --color-text-tertiary: var(--vtt-craft-journal-muted);
+  --color-text-subtle: var(--vtt-craft-journal-muted);
+  background: linear-gradient(var(--vtt-craft-journal-navigation-veil), var(--vtt-craft-journal-navigation-veil)), var(--vtt-craft-window-texture-layer);
+  background-color: #101114;
+  color: var(--vtt-craft-journal-text);
+  text-shadow: 0 1px 2px #000;
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) :is(.toc, .toc ol, .directory, .pages-list, .directory-list) {
+  background: transparent;
   text-shadow: none;
 }
 
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar),
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(.directory, .pages-list, .directory-list) {
-  background: var(--vtt-craft-window-texture-layer);
-  background-color: rgba(6, 7, 10, 0.78);
-  color: var(--vtt-craft-text-light);
-  text-shadow: 1px 1px 2px #000;
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) :is(.page-heading, .page-title, .heading-link, .category strong) {
+  color: var(--vtt-craft-journal-text);
+  text-shadow: 0 1px 2px #000;
 }
 
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]):not(.unbutton):not(.header-control) {
-  border: 4px solid transparent;
-  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch;
-  border-radius: 0;
-  background: none;
-  color: var(--vtt-craft-text-light);
-  text-shadow: 1px 1px 2px #000;
-  box-shadow: none;
-}
-
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(button, a.button, [role="button"]):not(.unbutton):not(.header-control):hover {
-  border-image-source: var(--vtt-craft-small-button-image-hover);
-  color: var(--vtt-craft-accent-strong);
-  box-shadow: 0 0 5px var(--vtt-craft-accent);
-}
-
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-sidebar, aside.sidebar) :is(.pages-list, .directory-list) :is(.directory-item, .page, li) {
-  color: var(--vtt-craft-text-light);
-}
-
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-entry-pages, .journal-entry-page, .journal-page-content, .journal-entry-content, .journal-content, .page-content, .editor-content, prose-mirror, .prosemirror) {
-  color: inherit;
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) :is(.page-index, .page-number) {
+  color: var(--vtt-craft-journal-muted);
   text-shadow: none;
 }
 
-body.vtt-craft-active .vtt-craft-journal-sheet :is(.journal-entry-pages, .journal-entry-page, .journal-page-content, .journal-entry-content, .journal-content, .page-content) :is(p, span, div, li, td, th, label, small, em, strong, h1, h2, h3, h4, h5, h6):not(.fa):not(.fas):not(.far):not(.fab):not([class^="fa-"]):not([class*=" fa-"]) {
-  color: inherit;
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) input:is([type="search"], [name="search"]) {
+  --input-background-color: #17191e;
+  --input-text-color: var(--vtt-craft-journal-text);
+  --input-placeholder-color: var(--vtt-craft-journal-muted);
+  --input-border-color: var(--vtt-craft-journal-border);
+  background-color: var(--input-background-color);
+  border-color: var(--input-border-color);
+  color: var(--input-text-color);
   text-shadow: none;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-journal-sheet:not(.vtt-craft-core-ui) > .window-header {
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) input:is([type="search"], [name="search"])::placeholder {
+  color: var(--vtt-craft-journal-muted);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) input:is([type="search"], [name="search"]):is(:hover, :focus):not(:disabled, [aria-disabled="true"], [inert]) {
+  border-color: var(--vtt-craft-journal-link);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) .toc .page-heading:is(:hover, :focus-within):not([aria-disabled="true"]),
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) .toc .heading-link:is(:hover, :focus-visible):not([aria-disabled="true"]) {
+  background-color: var(--vtt-craft-journal-hover);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) .toc .page:is(.active, [aria-selected="true"], [aria-current="page"], [aria-current="true"]) > .page-heading {
+  background-color: var(--vtt-craft-journal-current);
+  box-shadow: inset 3px 0 0 var(--vtt-craft-accent-strong);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) .toc .page:is(.active, [aria-selected="true"], [aria-current="page"], [aria-current="true"]) > .page-heading :is(.page-index, .page-number) {
+  color: var(--vtt-craft-journal-text);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-sidebar, aside.sidebar) :is(input[type="search"], input[name="search"], .page-heading, .heading-link):focus-visible {
+  outline: 2px solid var(--vtt-craft-journal-link);
+  outline-offset: -2px;
+}
+
+/* Pair the original native reading artwork with readable palette-aware text.
+   Native table fills and headings remain system-owned. Authored/themed
+   boundaries and descendant artwork keep their own presentation. */
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content > .journal-entry-content:not(:where(.themed, [style*="background" i], [style*="color" i])),
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-page-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content:not(:where(.themed, [style*="background" i], [style*="color" i])) {
+  --color-text-primary: var(--vtt-craft-journal-reading-text);
+  --color-text-emphatic: var(--vtt-craft-journal-reading-heading);
+  --color-text-secondary: var(--vtt-craft-journal-reading-muted);
+  --color-text-tertiary: var(--vtt-craft-journal-reading-muted);
+  --color-text-subtle: var(--vtt-craft-journal-reading-muted);
+  --color-text-accent: var(--vtt-craft-journal-reading-link);
+  --color-text-hyperlink: var(--vtt-craft-journal-reading-link);
+  --color-form-label: var(--vtt-craft-journal-reading-text);
+  --color-form-label-hover: var(--vtt-craft-journal-reading-link);
+  --color-form-hint: var(--vtt-craft-journal-reading-muted);
+  color: var(--vtt-craft-journal-reading-text);
+  text-shadow: none;
+}
+
+/* Give standalone viewers a textured reading surface using bundled core
+   artwork. Keep entry backgrounds in their original rules
+   so system-relative artwork URLs continue to resolve from their stylesheet. */
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-page-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content:not(:where(.themed, [style*="background" i], [style*="color" i])) {
+  background: var(--vtt-craft-journal-page-background);
+}
+
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content > .journal-entry-content:not(:where(.themed, [style*="background" i], [style*="color" i])) > .journal-header .title:not(:where([style*="background" i], [style*="color" i])),
+body.vtt-craft-active .vtt-craft-application.vtt-craft-journal-page-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content:not(:where(.themed, [style*="background" i], [style*="color" i])) > .journal-header .title:not(:where([style*="background" i], [style*="color" i])) {
+  --input-background-color: transparent;
+  --input-text-color: var(--vtt-craft-journal-reading-text);
+  --input-placeholder-color: var(--vtt-craft-journal-reading-muted);
+  color: var(--input-text-color);
+  text-shadow: none;
+}
+
+/* The reading accent does not recolor native editor or context-menu links. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.editor-menu, .menu-container, .context-menu, [popover]) {
+  --color-text-accent: var(--vtt-craft-journal-native-accent);
+  --color-form-label-hover: var(--vtt-craft-journal-native-form-label-hover);
+}
+
+/* Native toolbar colors remain unchanged. An opaque native-palette foundation
+   keeps translucent menus readable above the dark reading surface. */
+body.vtt-craft-active :is(
+  .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content > .journal-entry-content:not(:where(.themed, [style*="background" i], [style*="color" i])),
+  .vtt-craft-application.vtt-craft-journal-page-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content:not(:where(.themed, [style*="background" i], [style*="color" i]))
+) :is(prose-mirror, .prosemirror) > .menu-container:not(:where(.themed, [style*="background" i], [style*="color" i])):not(:where(:is(.journal-page-content, .editor-content, .ProseMirror):is(.themed, [style*="background" i], [style*="color" i]), :is(.journal-page-content, .editor-content, .ProseMirror) :is(.themed, [style*="background" i], [style*="color" i])) *) {
+  background-color: var(--vtt-craft-journal-editor-background);
+}
+
+/* Native code and secret rules consume their own local tokens. Restrict these
+   defaults to reading content, preserving custom themed and authored surfaces. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-page-content, .editor-content, .ProseMirror) :where(code):not(:where(.themed, [style*="background" i], [style*="color" i])):not(:where(:is(.journal-page-content, .editor-content, .ProseMirror):is(.themed, [style*="background" i], [style*="color" i]), :is(.journal-page-content, .editor-content, .ProseMirror) :is(.themed, [style*="background" i], [style*="color" i]), .editor-menu, .menu-container, .context-menu, [popover]) *) {
+  --color-code-bg: var(--vtt-craft-journal-code-background);
+  --color-code-border: var(--vtt-craft-journal-code-border);
+}
+
+/* Broken links retain their red meaning in either reading palette.
+   Authored/themed content keeps its own link treatment. */
+body.vtt-craft-active :is(
+  .vtt-craft-application.vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content > .journal-entry-content:not(:where(.themed, [style*="background" i], [style*="color" i])),
+  .vtt-craft-application.vtt-craft-journal-page-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-content:not(:where(.themed, [style*="background" i], [style*="color" i]))
+) :is(.journal-page-content, .editor-content, .ProseMirror) a.content-link.broken:not(:where(.themed, [style*="background" i], [style*="color" i])):not(:where(:is(.journal-page-content, .editor-content, .ProseMirror):is(.themed, [style*="background" i], [style*="color" i]), :is(.journal-page-content, .editor-content, .ProseMirror) :is(.themed, [style*="background" i], [style*="color" i]), .editor-menu, .menu-container, .context-menu, [popover]) *) {
+  color: var(--vtt-craft-journal-broken-link);
+  border-color: currentColor;
+}
+
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-page-content, .editor-content, .ProseMirror) :where(section.secret):not(:where(.themed, [style*="background" i], [style*="color" i])):not(:where(:is(.journal-page-content, .editor-content, .ProseMirror):is(.themed, [style*="background" i], [style*="color" i]), :is(.journal-page-content, .editor-content, .ProseMirror) :is(.themed, [style*="background" i], [style*="color" i]), .editor-menu, .menu-container, .context-menu, [popover]) *) {
+  --color-secret-bg: rgba(119, 89, 153, 0.18);
+  --color-revealed-bg: rgba(78, 121, 91, 0.18);
+  --color-secret-border: #78658c;
+}
+
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-journal-sheet, .vtt-craft-journal-page-sheet):not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) :is(.journal-page-content, .editor-content, .ProseMirror) :where(blockquote):not(:where(.themed, [style*="background" i], [style*="color" i])):not(:where(:is(.journal-page-content, .editor-content, .ProseMirror):is(.themed, [style*="background" i], [style*="color" i]), :is(.journal-page-content, .editor-content, .ProseMirror) :is(.themed, [style*="background" i], [style*="color" i]), .editor-menu, .menu-container, .context-menu, [popover]) *) {
+  border-inline-start: 3px solid var(--vtt-craft-journal-border);
+}
+
+body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-header {
   position: relative;
   display: flex;
   align-items: center;
   min-block-size: 38px;
   padding: 6px 12px;
-  overflow: hidden;
+  overflow: visible;
 }
 
-body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-journal-sheet:not(.vtt-craft-core-ui) > .window-header .window-title {
+body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-journal-sheet:not(.vtt-craft-core-ui):not(.vtt-craft-uesrpg-frame) > .window-header .window-title {
   flex: 1 1 auto;
   position: static !important;
   inset: auto !important;
@@ -472,9 +853,9 @@ body.vtt-craft-active :is(.application, .app, .window-app).vtt-craft-journal-she
   overflow: hidden;
   color: var(--vtt-craft-text-light);
   font-family: var(--font-primary, var(--vtt-craft-font-body));
-  font-size: clamp(13px, 1.2vw, 15px);
+  font-size: var(--font-size-14, 14px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -487,27 +868,6 @@ body.vtt-craft-active .vtt-craft-rolltable-sheet :is(thead, .table-header, .resu
   text-shadow: 1px 1px 2px #000;
 }
 
-body.vtt-craft-active .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, .button):not(.unbutton):not(.header-control),
-body.vtt-craft-active .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"]) {
-  min-block-size: 32px;
-  border: 6px solid transparent;
-  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch;
-  border-radius: 0;
-  background: none;
-  color: var(--vtt-craft-text-gold);
-  font-weight: 700;
-  letter-spacing: 0;
-  text-shadow: 1px 1px 2px #000;
-  box-shadow: none;
-}
-
-body.vtt-craft-active .vtt-craft-rolltable-sheet :is(.sheet-footer, .form-footer, footer, .dialog-buttons) :is(button, .button):not(.unbutton):not(.header-control):hover,
-body.vtt-craft-active .vtt-craft-rolltable-sheet :is(button[data-action="draw"], button[data-action="reset"], button[data-action="roll"], button[data-action="create"], button[data-action="delete"]):hover {
-  border-image-source: var(--vtt-craft-small-button-image-hover);
-  color: var(--vtt-craft-accent-strong);
-  box-shadow: 0 0 6px var(--vtt-craft-accent);
-}
-
 body.vtt-craft-active .vtt-craft-rolltable-sheet :is(.result-controls, .table-result-controls, .controls) :is(button, a, [role="button"]) {
   color: var(--vtt-craft-text-gold);
   text-shadow: 1px 1px 2px #000;
@@ -517,75 +877,151 @@ body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dial
   overflow: hidden;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header {
+/* D&D headers reserve space through normal flow. Dialogs keep this geometry
+   while closing; sheets still use their native minimized/transition layout. */
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  min-block-size: 42px;
-  padding: 8px 92px 8px 54px;
-  overflow: hidden;
+  flex: 0 0 auto;
+  block-size: auto;
+  min-block-size: var(--header-height, 30px);
+  margin-block-end: 0;
+  padding: 8px;
+  border: 0;
+  border-image: none;
+  overflow: visible;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .window-title {
-  flex: 1 1 auto;
-  position: static !important;
-  inset: auto !important;
-  translate: none !important;
-  transform: none !important;
-  visibility: visible !important;
-  display: block;
-  align-self: center;
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header .window-title {
+  position: static;
+  inset: auto;
+  transform: none;
+  z-index: auto;
+  flex: 1 1 6rem;
   min-inline-size: 0;
-  max-inline-size: 100%;
-  block-size: auto;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  color: var(--vtt-craft-text-gold);
-  font-family: var(--font-primary, var(--dnd5e-font-roboto, var(--vtt-craft-font-body)));
-  font-size: clamp(12px, 1.15vw, 14px);
+  font-family: var(--font-primary, var(--vtt-craft-font-body));
+  font-size: var(--font-size-14, 14px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
   letter-spacing: 0;
-  text-align: center;
+  color: var(--vtt-craft-text-gold);
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-shadow: 1px 1px 2px #000;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .window-icon {
+body.vtt-craft-active .dnd5e2.application.hidden-title:not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header .window-title {
+  flex-basis: 0;
+}
+
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header > .window-subtitle {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  order: 1;
+  flex: 0 0 100%;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--vtt-craft-text-light);
+  font-size: var(--font-size-12, 12px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header > .window-subtitle:empty {
+  display: none;
+}
+
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header > :is(.window-icon, .header-control, .window-controls, slide-toggle.mode-slider) {
+  position: static;
+  inset: auto;
+  transform: none;
   flex: 0 0 auto;
-  position: absolute;
-  inset-inline-start: 16px;
-  inset-block: 50% auto;
-  transform: translateY(-50%);
+  margin: 0;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .header-control,
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .window-controls {
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.minimized):is(:not(.minimizing, .maximizing), .vtt-craft-dialog) > .window-header .header-elements {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 4px;
+  min-inline-size: 0;
+  max-inline-size: min(40%, 12rem);
+  margin: 0;
+  color: var(--vtt-craft-text-light);
+}
+
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book button {
   flex: 0 0 auto;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header > .header-control {
-  position: absolute;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book span {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header > .header-control:last-child {
-  inset-inline-end: 16px;
+/* The themed header is a real row; the native sheet's negative content offset
+   would otherwise pull its body back under the controls. */
+body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(:is(.minimized, .minimizing, .maximizing)) > .window-content {
+  margin-block-start: 0;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header > .header-control:nth-last-child(2) {
-  inset-inline-end: 50px;
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:is(.minimized, .minimizing, .maximizing):not(.vtt-craft-core-ui) > .window-header {
+  border: 0;
+  border-image: none;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui) > .window-header > .window-controls {
-  position: absolute;
-  inset-inline-end: 16px;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
+/* UESRPG already owns a pointer-transparent 20px overlay and native insets.
+   Swap only the artwork; never add another application or title-bar border. */
+body.system-uesrpg-3ev4.vtt-craft-active .vtt-craft-uesrpg-frame {
+  background: var(--vtt-craft-framed-surface-background);
+  background-origin: var(--vtt-craft-framed-surface-background-origin);
+  background-color: var(--vtt-craft-chrome-overlay);
+  background-clip: var(--vtt-craft-framed-surface-background-clip);
+}
+
+body.system-uesrpg-3ev4.vtt-craft-active .vtt-craft-uesrpg-frame::before {
+  border-image: var(--vtt-craft-body-frame-backing) 160 / 20px stretch;
+}
+
+body.system-uesrpg-3ev4.vtt-craft-active .vtt-craft-uesrpg-frame:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(:is(.minimized, .minimizing, .maximizing))::before {
+  border-image: var(--vtt-craft-body-frame-backing) 160 / 20px stretch;
+}
+
+body.system-uesrpg-3ev4.vtt-craft-active .vtt-craft-uesrpg-frame > .window-header {
+  background: var(--vtt-craft-window-texture-layer);
+  background-color: var(--vtt-craft-chrome-overlay);
+  color: var(--vtt-craft-text-gold);
+}
+
+/* Keep long minimized titles in the native flex row beside its controls. */
+body.system-uesrpg-3ev4.vtt-craft-active .vtt-craft-uesrpg-frame:is(.minimized, .minimizing, .maximizing) > .window-header > .window-title {
+  position: static;
+  inset: auto;
+  transform: none;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-actor-sheet):not(.vtt-craft-item-sheet) :is(.window-content, form, fieldset, section, article, .form-group, .form-fields, .hint) {
@@ -593,291 +1029,15 @@ body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-c
   letter-spacing: 0;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-actor-sheet):not(.vtt-craft-item-sheet) :is(label, legend, h1, h2, h3, h4, h5, h6, p, span, small, strong, em, li, dt, dd, .label, .hint, .units, .name, .title):not(.fa):not(.fas):not(.far):not(.fab):not([class^="fa-"]):not([class*=" fa-"]):not(foundry-icon):not(dnd5e-icon) {
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-actor-sheet):not(.vtt-craft-item-sheet) :is(label, legend, h1, h2, h3, h4, h5, h6, p, span, small, strong, em, li, dt, dd, .label, .hint, .units, .name, .title):not(.fa):not(.fas):not(.far):not(.fab):not([class^="fa-"]):not([class*=" fa-"]):not(foundry-icon):not(dnd5e-icon):not(:where(button, a.button) *) {
   font-family: var(--font-primary, var(--dnd5e-font-roboto, var(--vtt-craft-font-body)));
   letter-spacing: 0;
-  text-shadow: 1px 1px 2px #000;
+  text-shadow: none;
 }
 
-body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-actor-sheet):not(.vtt-craft-item-sheet) :is(input, select, textarea, button, .button):not(.unbutton):not(.header-control) {
+body.vtt-craft-active .dnd5e2.application.vtt-craft-application:not(.vtt-craft-core-ui):not(.vtt-craft-actor-sheet):not(.vtt-craft-item-sheet) :is(input:not([type="submit"], [type="button"], [type="reset"]), select, textarea):not(.unbutton):not(.header-control) {
   font-family: var(--font-primary, var(--dnd5e-font-roboto, var(--vtt-craft-font-body)));
   letter-spacing: 0;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header {
-  padding-inline-start: 84px;
-  padding-inline-end: 142px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header .window-icon {
-  inline-size: 24px;
-  block-size: 24px;
-  min-inline-size: 24px;
-  min-block-size: 24px;
-  inset-inline-start: 34px;
-  inset-block-start: 50%;
-  display: inline-grid;
-  place-items: center;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 999px;
-  line-height: 1;
-  z-index: 2;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header .window-icon :is(i, svg, img, foundry-icon, dnd5e-icon),
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .window-icon :is(i, svg, img, foundry-icon, dnd5e-icon) {
-  inline-size: 16px;
-  block-size: 16px;
-  max-inline-size: 16px;
-  max-block-size: 16px;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header .window-title {
-  flex: 1 1 auto;
-  inline-size: auto;
-  max-inline-size: 100%;
-  padding-inline: 8px;
-  text-align: center;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header > slide-toggle.mode-slider[data-action="changeMode"] {
-  position: absolute;
-  inset-inline-start: 34px;
-  inset-inline-end: auto;
-  inset-block-start: 50%;
-  flex: none;
-  margin: 0;
-  transform: translateY(-50%);
-  z-index: 4;
-  pointer-events: auto;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header > slide-toggle.mode-slider[data-action="changeMode"] .slide-toggle-thumb,
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > slide-toggle.mode-slider[data-action="changeMode"] .slide-toggle-thumb {
-  line-height: 12px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements {
-  position: static !important;
-  display: flex;
-  flex: 0 1 auto;
-  align-items: center;
-  gap: 4px;
-  min-inline-size: 0;
-  max-inline-size: 34%;
-  block-size: auto;
-  margin: 0;
-  overflow: hidden;
-  transform: none !important;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-inline-size: 0;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-actor-sheet:not(.vtt-craft-core-ui) > .window-header > .window-controls {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  max-inline-size: 132px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header {
-  padding-inline: 54px 16px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .window-icon {
-  inline-size: 24px;
-  block-size: 24px;
-  min-inline-size: 24px;
-  min-block-size: 24px;
-  inset-inline-start: 28px;
-  inset-block-start: 50%;
-  display: inline-grid;
-  place-items: center;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 999px;
-  line-height: 1;
-  z-index: 2;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .window-title {
-  visibility: hidden !important;
-  flex: 1 1 auto;
-  inline-size: auto;
-  max-inline-size: none;
-  padding: 0;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > slide-toggle.mode-slider[data-action="changeMode"] {
-  position: absolute;
-  inset-inline-start: 30px;
-  inset-inline-end: auto;
-  inset-block-start: 50%;
-  flex: none;
-  margin: 0;
-  transform: translateY(-50%);
-  z-index: 4;
-  pointer-events: auto;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements {
-  display: contents;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book {
-  position: absolute;
-  inset-inline-end: 196px;
-  inset-block-start: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  inline-size: 94px;
-  min-inline-size: 0;
-  max-inline-size: 94px;
-  block-size: 24px;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book button {
-  flex: 0 0 auto;
-  margin: 0;
-  display: grid;
-  place-content: center;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .header-elements .source-book span {
-  min-inline-size: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > .header-control:not(.state-toggle):not([data-action="copyUuid"]):not([data-action="close"]):not([data-action="showConfiguration"]) {
-  position: absolute;
-  inset-inline-end: 162px;
-  inset-block-start: 50%;
-  display: inline-grid;
-  place-content: center;
-  inline-size: 24px;
-  min-inline-size: 24px;
-  max-inline-size: 24px;
-  block-size: 24px;
-  margin: 0;
-  overflow: hidden;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .state-toggle {
-  position: absolute;
-  inset-block-start: 50%;
-  display: inline-grid;
-  place-content: center;
-  inline-size: 24px;
-  min-inline-size: 24px;
-  max-inline-size: 24px;
-  block-size: 24px;
-  margin: 0;
-  overflow: hidden;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .state-toggle.toggle-equipped {
-  inset-inline-end: 90px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header .state-toggle.toggle-identified {
-  inset-inline-end: 126px;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > [data-action="copyUuid"] {
-  position: absolute;
-  inset-inline-end: 50px;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > [data-action="close"] {
-  position: absolute;
-  inset-inline-end: 16px;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-}
-
-body.vtt-craft-active .dnd5e2.application.vtt-craft-item-sheet:not(.vtt-craft-core-ui) > .window-header > .window-controls {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  max-inline-size: 132px;
-}
-
-body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) :is(.item-controls, .effect-controls, .activity-controls, .document-controls, .control-buttons, .item-detail.item-controls) {
-  box-sizing: border-box;
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  inline-size: auto;
-  min-inline-size: 0;
-  max-inline-size: 100%;
-  white-space: nowrap;
-}
-
-body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) :is(.item-controls, .effect-controls, .activity-controls, .document-controls, .control-buttons, .item-detail.item-controls) > :is(.item-control, .item-action, .effect-control, .activity-control, .document-control, .control-button, button, a) {
-  box-sizing: border-box;
-  flex: 0 0 auto;
-  inline-size: auto;
-  min-inline-size: 0;
-  block-size: auto;
-  min-block-size: 0;
-  margin: 0;
-  white-space: nowrap;
-}
-
-body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) :is(.item-controls, .effect-controls, .activity-controls, .document-controls, .control-buttons) > :is(.item-control, .item-action, .effect-control, .activity-control, .document-control, .control-button, button, a) :is(i, svg, img, foundry-icon, dnd5e-icon) {
-  flex: 0 0 auto;
-  inline-size: 1em;
-  block-size: 1em;
-  max-inline-size: 16px;
-  max-block-size: 16px;
-  margin: 0;
-  line-height: 1;
-}
-
-body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) :is(.window-resize-handle, .window-resizable-handle) {
-  display: block !important;
-  position: absolute;
-  inset-inline-end: 3px;
-  inset-block-end: 3px;
-  inline-size: 18px;
-  block-size: 18px;
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 20;
-  filter: drop-shadow(0 1px 2px #000);
 }
 
 body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-item-sheet):not(.vtt-craft-core-ui) {
@@ -911,78 +1071,140 @@ body.vtt-craft-active .dnd5e2.application:is(.vtt-craft-actor-sheet, .vtt-craft-
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.45), 0 0 5px var(--vtt-craft-accent) !important;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-block-size: 42px;
-  padding: 8px 92px 8px 54px;
-  overflow: hidden;
+/* Native dialog widths stay system-owned. Mixed/native footers retain their
+   fallback layout; measured homogeneous action groups use the grid below. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) {
+  --vtt-craft-button-wrap: normal;
+  align-items: stretch;
+  gap: var(--vtt-craft-form-gap);
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header .window-title {
-  flex: 1 1 auto;
-  position: static !important;
-  inset: auto !important;
-  translate: none !important;
-  transform: none !important;
-  visibility: visible !important;
-  display: block;
-  align-self: center;
+/* UESRPG owns responsive footer grids and its resource workflow layout. */
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame) :is(.dialog-buttons, .form-footer) {
+  flex-wrap: wrap;
+}
+
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet, .vtt-craft-uesrpg-frame) :is(.dialog-buttons, .form-footer):not(.vtt-craft-action-group) > :is(button, a.button, input[type="submit"], input[type="button"], input[type="reset"]):not(.icon, .unbutton, .ui-control, .control-button, .config-button, .radio-button, .split-control, .split-button, .split-buttons, .vtt-craft-sized-action):not(:where(.split-button, .split-buttons) *) {
+  box-sizing: border-box;
+  flex: 1 1 max-content;
+  inline-size: auto;
   min-inline-size: 0;
   max-inline-size: 100%;
   block-size: auto;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  color: var(--vtt-craft-text-gold);
-  font-family: var(--font-primary, var(--dnd5e-font-roboto, var(--vtt-craft-font-body)));
-  font-size: clamp(12px, 1.15vw, 14px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-shadow: 1px 1px 2px #000;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: none;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header .window-icon {
-  flex: 0 0 auto;
-  position: absolute;
-  inset-inline-start: 16px;
-  inset-block: 50% auto;
-  transform: translateY(-50%);
-}
-
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header .header-control,
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header .window-controls {
+body.vtt-craft-active .vtt-craft-application:is(.vtt-craft-dialog, .vtt-craft-roll-dialog):not(.vtt-craft-core-ui, .vtt-craft-document-sheet) :is(.dialog-buttons, .form-footer) > button > :is(i, svg, foundry-icon, dnd5e-icon) {
   flex: 0 0 auto;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header > .header-control {
-  position: absolute;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
+/* The application decorator opts text actions into size-only normalization.
+   Sheet font families, colors, artwork, visibility and button display stay native. */
+body.vtt-craft-active .vtt-craft-application .vtt-craft-sized-action,
+body.system-uesrpg-3ev4.vtt-craft-active .worldbuilding.sheet:is(.actor, .item).vtt-craft-application.vtt-craft-document-sheet .vtt-craft-sized-action {
+  --vtt-craft-action-white-space: nowrap;
+  --vtt-craft-action-overflow-wrap: normal;
+  box-sizing: border-box;
+  /* Native "transition: all" must not animate the geometry we measure. */
+  transition-property: background-color, border-color, color, box-shadow, outline-color, filter, transform, opacity;
+  min-block-size: var(--vtt-craft-action-size);
+  block-size: auto;
+  padding: 4px var(--vtt-craft-action-padding-inline, 8px);
+  font-size: var(--vtt-craft-action-font-size, 14px);
+  line-height: 1.25;
+  white-space: var(--vtt-craft-action-white-space);
+  overflow-wrap: var(--vtt-craft-action-overflow-wrap);
+  word-break: normal;
+  hyphens: none;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header > .header-control:last-child {
-  inset-inline-end: 16px;
+/* Existing visible label elements inherit the measured action typography.
+   Icons and hidden descendants are never assigned this marker. */
+body.vtt-craft-active .vtt-craft-application .vtt-craft-sized-action .vtt-craft-action-text,
+body.system-uesrpg-3ev4.vtt-craft-active .worldbuilding.sheet:is(.actor, .item).vtt-craft-application.vtt-craft-document-sheet .vtt-craft-sized-action .vtt-craft-action-text {
+  font-size: inherit;
+  line-height: inherit;
+  white-space: var(--vtt-craft-action-white-space, nowrap);
+  overflow-wrap: var(--vtt-craft-action-overflow-wrap, normal);
+  word-break: normal;
+  overflow: visible;
+  text-overflow: clip;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header > .header-control:nth-last-child(2) {
-  inset-inline-end: 50px;
+/* JavaScript chooses the logical column count from the available content width.
+   Two tracks per action permit centered incomplete rows without changing width.
+   Marked groups own these layout properties even when native layout is inline;
+   removing the markers restores the untouched native declarations. */
+body.vtt-craft-active .vtt-craft-application .vtt-craft-action-group:not([hidden], .hidden, [aria-hidden="true"], [style*="display: none" i], [style*="display:none" i]),
+body.system-uesrpg-3ev4.vtt-craft-active .worldbuilding.sheet:is(.actor, .item).vtt-craft-application.vtt-craft-document-sheet .vtt-craft-action-group:not([hidden], .hidden, [aria-hidden="true"], [style*="display: none" i], [style*="display:none" i]) {
+  display: grid !important;
+  grid-template-columns: repeat(calc(var(--vtt-craft-action-columns, 1) * 2), minmax(0, 1fr)) !important;
+  grid-auto-rows: minmax(var(--vtt-craft-action-row-height, var(--vtt-craft-action-size)), auto);
+  gap: var(--vtt-craft-form-gap) !important;
+  align-items: stretch;
+  justify-items: stretch;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-header > .window-controls {
-  position: absolute;
-  inset-inline-end: 16px;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
+body.vtt-craft-active .vtt-craft-application .vtt-craft-action-group > .vtt-craft-group-action,
+body.system-uesrpg-3ev4.vtt-craft-active .worldbuilding.sheet:is(.actor, .item).vtt-craft-application.vtt-craft-document-sheet .vtt-craft-action-group > .vtt-craft-group-action {
+  grid-column: var(--vtt-craft-action-column, 1) / span 2 !important;
+  grid-row: var(--vtt-craft-action-row, 1) !important;
+  align-self: stretch;
+  justify-self: stretch;
+  inline-size: 100% !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  min-block-size: var(--vtt-craft-action-row-height, var(--vtt-craft-action-size));
+  block-size: auto;
 }
 
+/* Only a label that still exceeds a full-width slot receives this fallback. */
+body.vtt-craft-active .vtt-craft-application .vtt-craft-action-label-wrap,
+body.system-uesrpg-3ev4.vtt-craft-active .worldbuilding.sheet:is(.actor, .item).vtt-craft-application.vtt-craft-document-sheet .vtt-craft-action-label-wrap {
+  --vtt-craft-action-white-space: normal;
+  --vtt-craft-action-overflow-wrap: anywhere;
+}
+
+/* AC5e's default roll action supplies an inline border shorthand, which also
+   resets border-image. Override only its neutral default-action paint; native
+   disabled, destructive and selected cues retain their own presentation. */
+body.vtt-craft-active :is(
+  .dnd5e2.vtt-craft-application.vtt-craft-roll-dialog:not(.vtt-craft-core-ui, .vtt-craft-document-sheet) > :is(.dialog-buttons, .form-footer),
+  .dnd5e2.vtt-craft-application.vtt-craft-roll-dialog:not(.vtt-craft-core-ui, .vtt-craft-document-sheet) > .window-content > :is(.dialog-buttons, .form-footer)
+) > button.ac5e-button.vtt-craft-sized-action:is([autofocus], .default):not(:disabled, [disabled], [aria-disabled="true"], [inert], .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .active, [aria-pressed="true"], [aria-selected="true"]):not(:where([aria-disabled="true"], [inert], .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-document-sheet) *) {
+  border: var(--vtt-craft-action-border) solid transparent !important;
+  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch !important;
+  background-color: transparent !important;
+  color: var(--vtt-craft-text-gold) !important;
+}
+
+body.vtt-craft-active :is(
+  .dnd5e2.vtt-craft-application.vtt-craft-roll-dialog:not(.vtt-craft-core-ui, .vtt-craft-document-sheet) > :is(.dialog-buttons, .form-footer),
+  .dnd5e2.vtt-craft-application.vtt-craft-roll-dialog:not(.vtt-craft-core-ui, .vtt-craft-document-sheet) > .window-content > :is(.dialog-buttons, .form-footer)
+) > button.ac5e-button.vtt-craft-sized-action:is([autofocus], .default):not(:disabled, [disabled], [aria-disabled="true"], [inert], .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .active, [aria-pressed="true"], [aria-selected="true"]):not(:where([aria-disabled="true"], [inert], .danger, .destructive, .error, .warning, .success, .failure, .critical, .fumble, .healing, .vtt-craft-document-sheet) *):is(:hover, :focus, :focus-visible, :active) {
+  border-image-source: var(--vtt-craft-small-button-image-hover) !important;
+  color: var(--vtt-craft-pill-text-active) !important;
+}
+
+/* Roll content uses the themed dark window palette in either client palette.
+   Semantic states, control geometry and native focus behavior stay native. */
 body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-content {
+  --color-text-primary: var(--vtt-craft-text-light);
+  --color-text-secondary: #bcb8b0;
+  --color-text-tertiary: #bcb8b0;
+  --color-text-subtle: #bcb8b0;
+  --color-text-emphatic: var(--vtt-craft-text-light);
+  --input-background-color: var(--dnd5e-color-blue-gray-2, #252830);
+  --input-text-color: var(--vtt-craft-text-light);
+  --input-placeholder-color: #bcb8b0;
+  color-scheme: dark;
   min-block-size: 0;
   box-sizing: border-box;
   overflow: auto;
@@ -994,36 +1216,23 @@ body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dial
   max-inline-size: 100%;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog .dialog-buttons button {
-  block-size: 32px;
-  min-block-size: 30px;
-  max-block-size: 34px;
-  padding: 0 8px;
-  border: 6px solid transparent;
-  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch;
-  border-radius: 0;
-  background: none;
-  color: var(--vtt-craft-text-gold);
-  font-family: var(--dnd5e-font-roboto-condensed, var(--vtt-craft-font-body));
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-shadow: 1px 1px 2px #000;
-  box-shadow: none;
+body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-content > fieldset {
+  min-inline-size: 0;
+  max-inline-size: 100%;
 }
 
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog .dialog-buttons button:hover,
-body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog .dialog-buttons button:focus-visible {
-  border-image-source: var(--vtt-craft-small-button-image-hover);
-  color: var(--vtt-craft-accent-strong);
-  box-shadow: 0 0 6px var(--vtt-craft-accent);
+body.vtt-craft-active .dnd5e2.application.roll-configuration.vtt-craft-roll-dialog > .window-content > fieldset > legend {
+  color: var(--vtt-craft-text-light);
 }
 
 /* --------------------------------------------------------------------------
    Core controls and sidebar tab rail
    -------------------------------------------------------------------------- */
 
-body.vtt-craft-core-enabled :is(#sidebar-tabs, #ui-left, #ui-right, #controls, #scene-controls, .scene-controls, .control-palette, .placeable-palette, .tool-palette, .control-tools, .scene-control-tools, .controls-tray) {
+/* Keep generic palette class names within core controls; module HUDs retain
+   ownership of their surfaces. */
+body.vtt-craft-core-enabled :is(#sidebar-tabs, #ui-left, #ui-right, #controls, #scene-controls),
+body.vtt-craft-core-enabled :is(#ui-left, #controls, #scene-controls) :is(.scene-controls, .control-palette, .placeable-palette, .tool-palette, .control-tools, .scene-control-tools, .controls-tray) {
   background: transparent !important;
   border: 0 !important;
   border-image: none !important;
@@ -1031,7 +1240,7 @@ body.vtt-craft-core-enabled :is(#sidebar-tabs, #ui-left, #ui-right, #controls, #
   filter: none !important;
 }
 
-body.vtt-craft-core-enabled :is(#ui-left, #controls, #scene-controls, .scene-controls) :is(.control-palette, .placeable-palette, .tool-palette, .control-tools, .scene-control-tools, .controls-tray, .control, .tool, .scene-control, .control-tool):not(button):not(a):not([role="button"]) {
+body.vtt-craft-core-enabled :is(#ui-left, #controls, #scene-controls) :is(.control-palette, .placeable-palette, .tool-palette, .control-tools, .scene-control-tools, .controls-tray, .control, .tool, .scene-control, .control-tool):not(button):not(a):not([role="button"]) {
   inline-size: auto !important;
   block-size: auto !important;
   min-inline-size: 0 !important;
@@ -1074,15 +1283,7 @@ body.vtt-craft-core-enabled #scene-controls #scene-controls-tools :is(li, .tool,
   overflow: visible !important;
 }
 
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button,
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control, button.control, a.control, button.tool, a.tool),
-  #controls :is(button, a, [role="button"]),
-  #scene-controls :is(button, a, [role="button"]),
-  .scene-controls :is(button, a, [role="button"]),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-) {
+body.vtt-craft-core-enabled :is(.vtt-craft-core-control-button, .vtt-craft-sidebar-tab-button) {
   box-sizing: border-box !important;
   inline-size: var(--vtt-craft-control-size) !important;
   block-size: var(--vtt-craft-control-size) !important;
@@ -1096,77 +1297,29 @@ body.vtt-craft-core-enabled :is(
   border-radius: 4px !important;
   background: transparent var(--vtt-craft-square-button) center / 100% 100% no-repeat !important;
   color: var(--vtt-craft-text-light) !important;
-  display: inline-grid !important;
   place-items: center !important;
   line-height: 1 !important;
   letter-spacing: normal !important;
   text-shadow: 0 1px 2px #000 !important;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.72) !important;
   overflow: visible !important;
+  align-items: center;
+  justify-content: center;
 }
 
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button,
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control, button.control, a.control, button.tool, a.tool),
-  #controls :is(button, a, [role="button"]),
-  #scene-controls :is(button, a, [role="button"]),
-  .scene-controls :is(button, a, [role="button"]),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-):is(:hover, .active, [aria-pressed="true"], [aria-current="true"], [aria-selected="true"]) {
-  color: var(--vtt-craft-accent-strong) !important;
+body.vtt-craft-core-enabled :is(.vtt-craft-core-control-button, .vtt-craft-sidebar-tab-button):is(:hover, .active, [aria-pressed="true"], [aria-current="true"], [aria-selected="true"]):not(:disabled):not([aria-disabled="true"]) {
+  color: var(--vtt-craft-pill-text-active) !important;
   border-color: var(--vtt-craft-accent-strong) !important;
   box-shadow: 0 0 9px var(--vtt-craft-accent), inset 0 0 8px rgba(0, 0, 0, 0.72) !important;
 }
 
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button:is(.icon, .ui-control),
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  .scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-),
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button:is(.icon, .ui-control),
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  .scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-)::before,
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button:is(.icon, .ui-control),
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  .scene-controls :is(button.ui-control, a.ui-control, [role="button"].ui-control),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-)::after {
-  font-family: var(--font-awesome, "Font Awesome 6 Pro", "Font Awesome 6 Free", "Font Awesome 5 Free") !important;
-  font-weight: 900 !important;
-  letter-spacing: normal !important;
-}
-
-body.vtt-craft-core-enabled :is(
-  .vtt-craft-core-control-button,
-  #ui-left :is(button.ui-control, a.ui-control, [role="button"].ui-control, button.control, a.control, button.tool, a.tool),
-  #controls :is(button, a, [role="button"]),
-  #scene-controls :is(button, a, [role="button"]),
-  .scene-controls :is(button, a, [role="button"]),
-  #sidebar-tabs > menu :is(button.ui-control, a.ui-control, [role="tab"].ui-control, [data-action="tab"].ui-control, [data-tab].ui-control),
-  #sidebar-tabs .vtt-craft-sidebar-tab-button
-) :is(i, svg, img, foundry-icon, dnd5e-icon) {
+body.vtt-craft-core-enabled :is(.vtt-craft-core-control-button, .vtt-craft-sidebar-tab-button) :is(i, svg, img, foundry-icon, dnd5e-icon) {
   inline-size: var(--vtt-craft-control-icon-size) !important;
   block-size: var(--vtt-craft-control-icon-size) !important;
   max-inline-size: var(--vtt-craft-control-icon-size) !important;
   max-block-size: var(--vtt-craft-control-icon-size) !important;
   margin: 0 !important;
   color: currentColor !important;
-  fill: currentColor !important;
   font-size: var(--vtt-craft-control-icon-size) !important;
   line-height: 1 !important;
   text-shadow: none !important;
@@ -1176,7 +1329,7 @@ body.vtt-craft-core-enabled :is(
 body.vtt-craft-core-enabled #sidebar-tabs {
   inline-size: calc(var(--vtt-craft-control-size) + 8px) !important;
   min-inline-size: calc(var(--vtt-craft-control-size) + 8px) !important;
-  padding: 16px 4px 16px 0 !important;
+  padding: 8px 4px 8px 0 !important;
   align-items: center !important;
   justify-content: flex-start !important;
   background: transparent !important;
@@ -1209,7 +1362,6 @@ body.vtt-craft-core-enabled :is(#ui-right, #sidebar-tabs, #sidebar-tabs > menu, 
 
 body.vtt-craft-core-enabled #sidebar-tabs > menu {
   box-sizing: border-box !important;
-  display: flex !important;
   flex-direction: column !important;
   gap: 6px !important;
   margin: 0 !important;
@@ -1237,17 +1389,6 @@ body.vtt-craft-core-enabled #sidebar-tabs > menu > li {
   box-shadow: none !important;
   backdrop-filter: none !important;
   overflow: visible !important;
-}
-
-/* Explicitly leave nested sidebar/tab controls native. */
-body.vtt-craft-core-enabled #sidebar :is(.tab, .sidebar-tab) :is(nav.tabs, .tabs):not(#sidebar-tabs) :is(a, button, [role="tab"]) {
-  inline-size: auto !important;
-  min-inline-size: 0 !important;
-  block-size: auto !important;
-  min-block-size: 0 !important;
-  flex: initial !important;
-  background: revert !important;
-  box-shadow: none !important;
 }
 
 body.vtt-craft-core-enabled #scene-navigation {
@@ -1283,7 +1424,7 @@ body.vtt-craft-core-enabled #sidebar-content {
   width: var(--sidebar-full-width) !important;
 }
 
-body.vtt-craft-core-enabled #sidebar-content .tab:not(#sidebar-tabs) {
+body.vtt-craft-core-enabled #sidebar-content > .tab:not(#sidebar-tabs) {
   inline-size: var(--sidebar-width) !important;
   width: var(--sidebar-width) !important;
   max-inline-size: var(--sidebar-width) !important;
@@ -1300,10 +1441,7 @@ body.vtt-craft-core-enabled #sidebar::after {
   backdrop-filter: none !important;
 }
 
-body.vtt-craft-core-enabled #sidebar :is(.sidebar-tab, .tab):not(#sidebar-tabs),
-body.vtt-craft-core-enabled #sidebar #chat,
-body.vtt-craft-core-enabled #sidebar .tab[data-tab="chat"],
-body.vtt-craft-core-enabled #sidebar .sidebar-tab[data-tab="chat"] {
+body.vtt-craft-core-enabled #sidebar-content > :is(.sidebar-tab, .tab):not(#sidebar-tabs) {
   box-sizing: border-box !important;
   inline-size: var(--sidebar-width, 100%) !important;
   max-inline-size: var(--sidebar-width, 100%) !important;
@@ -1326,325 +1464,408 @@ body.vtt-craft-core-enabled #sidebar :is(.directory-item, .combatant, .folder, .
   box-shadow: inset 3px 0 0 var(--vtt-craft-accent-strong), inset 0 0 12px rgba(0, 0, 0, 0.38) !important;
 }
 
-body.vtt-craft-core-enabled #sidebar #chat,
-body.vtt-craft-core-enabled #sidebar .tab[data-tab="chat"],
-body.vtt-craft-core-enabled #sidebar .sidebar-tab[data-tab="chat"] {
-  --vtt-craft-chat-toolbar-button-size: clamp(22px, 6.2vw, 24px);
-  gap: 3px !important;
-  padding: 6px 0 6px 4px !important;
-  overflow: hidden !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-log, .chat-log) {
-  box-sizing: border-box !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  min-block-size: 0 !important;
-  padding: 0 0 0 4px !important;
-  border: 0 !important;
-  background: transparent !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) {
-  box-sizing: border-box !important;
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 2px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) :is(button, a, [role="button"], select):not(.unbutton) {
-  box-sizing: border-box !important;
-  min-inline-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  block-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  min-block-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  padding: 0 3px !important;
-  border: 3px solid transparent !important;
-  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch !important;
-  border-radius: 0 !important;
-  background: none !important;
-  color: var(--vtt-craft-text-light) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 3px !important;
-  font-family: var(--vtt-craft-font-body) !important;
-  font-size: var(--font-size-12, 12px) !important;
-  line-height: 1 !important;
-  letter-spacing: normal !important;
-  text-shadow: 0 1px 2px #000 !important;
-  box-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) :is(button, a, [role="button"], select):is(:hover, .active, [aria-selected="true"], [aria-pressed="true"]) {
-  border-image-source: var(--vtt-craft-small-button-image-hover) !important;
-  color: var(--vtt-craft-accent-strong) !important;
-  box-shadow: 0 0 5px var(--vtt-craft-accent) !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) :is(i, svg, img, foundry-icon, dnd5e-icon) {
-  inline-size: 14px !important;
-  block-size: 14px !important;
-  max-inline-size: 14px !important;
-  max-block-size: 14px !important;
-  margin: 0 !important;
-  color: currentColor !important;
-  fill: currentColor !important;
-  font-size: 14px !important;
-  line-height: 1 !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat #message-modes {
-  box-sizing: border-box !important;
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 2px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat #message-modes.vertical {
-  flex-direction: row !important;
-  align-items: center !important;
-}
-
-body.vtt-craft-core-enabled #chat #message-modes :is(button, a, [role="button"], .ui-control) {
-  box-sizing: border-box !important;
-  inline-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  block-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  min-inline-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  min-block-size: var(--vtt-craft-chat-toolbar-button-size) !important;
-  flex: 0 0 var(--vtt-craft-chat-toolbar-button-size) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 3px solid transparent !important;
-  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch !important;
-  border-radius: 0 !important;
-  background: none !important;
-  color: var(--vtt-craft-text-light) !important;
-  display: inline-grid !important;
-  place-items: center !important;
-  font-family: var(--font-awesome, "Font Awesome 6 Pro", "Font Awesome 6 Free", "Font Awesome 5 Free") !important;
-  font-size: 13px !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  letter-spacing: normal !important;
-  text-shadow: 0 1px 2px #000 !important;
-  box-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat #message-modes :is(button, a, [role="button"], .ui-control):is(:hover, [aria-pressed="true"], .active) {
-  border-image-source: var(--vtt-craft-small-button-image-hover) !important;
-  color: var(--vtt-craft-accent-strong) !important;
-  box-shadow: 0 0 5px var(--vtt-craft-accent) !important;
-}
-
-body.vtt-craft-core-enabled #chat #message-modes :is(button, a, [role="button"], .ui-control)::before,
-body.vtt-craft-core-enabled #chat #message-modes :is(button, a, [role="button"], .ui-control)::after {
-  font-family: var(--font-awesome, "Font Awesome 6 Pro", "Font Awesome 6 Free", "Font Awesome 5 Free") !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(.chat-form, #chat-controls, .chat-controls, .chat-input-controls, #chat-message, #chat-message > .editor-container) {
-  box-sizing: border-box !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-}
-
-body.vtt-craft-core-enabled #chat .chat-form {
-  width: auto !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#message-modes, .control-buttons) {
-  box-sizing: border-box !important;
-  inline-size: auto !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) .control-buttons {
-  display: flex !important;
-  flex: 0 0 auto !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 2px !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) > #message-modes {
-  flex: 0 1 auto !important;
-}
-
-body.vtt-craft-core-enabled #chat :is(#chat-controls, .chat-controls, .chat-input-controls) > .control-buttons {
-  margin-inline-start: auto !important;
-}
-
-body.vtt-craft-core-enabled #chat #chat-message menu {
-  gap: 2px !important;
-  justify-content: flex-start !important;
-  padding-inline: 2px !important;
-  max-inline-size: 100% !important;
-  overflow: hidden !important;
-}
-
-body.vtt-craft-core-enabled #chat #chat-message menu .source-code {
-  margin-right: 0 !important;
-}
-
-body.vtt-craft-core-enabled #chat #chat-message menu :is(button, [role="button"]) {
-  --button-size: clamp(22px, 6.2vw, 24px) !important;
-}
-
-body.vtt-craft-core-enabled #chat #chat-message menu .pm-dropdown.format {
-  inline-size: clamp(62px, 22%, 76px) !important;
-  min-inline-size: 0 !important;
-  max-inline-size: 76px !important;
-}
-
-/* Chat cards: one outer parchment, transparent nested content. */
-body.vtt-craft-core-enabled :is(#chat-log, #chat-notifications, .chat-log, .chat-popout) :is(.chat-message, .vtt-craft-chat-message),
-body.vtt-craft-core-enabled :is(.chat-message.dnd5e2, .dnd5e2.chat-message, .vtt-craft-dnd5e-chat-message) {
-  box-sizing: border-box !important;
-  display: block !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  margin: 0 0 6px !important;
-  padding: 6px !important;
-  border: 10px solid transparent !important;
-  border-image-source: var(--vtt-craft-parchment) !important;
-  border-image-slice: 30 fill !important;
-  border-image-repeat: stretch !important;
-  border-radius: 0 !important;
-  background: transparent var(--vtt-craft-parchment) center / 100% 100% no-repeat !important;
-  color: var(--vtt-craft-text-dark) !important;
-  text-shadow: none !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.42) !important;
-  contain: none !important;
-  overflow: visible !important;
-}
-
-body.vtt-craft-core-enabled #sidebar #chat .chat-scroll {
-  box-sizing: border-box !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  direction: rtl !important;
-  scrollbar-gutter: auto !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-
-body.vtt-craft-core-enabled #sidebar #chat .chat-scroll > :is(#chat-log, .chat-log) {
-  direction: ltr !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-}
-
-body.vtt-craft-core-enabled #sidebar #chat .chat-scroll > :is(#chat-log, .chat-log) > :is(.chat-message, .vtt-craft-chat-message) {
-  direction: ltr !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  margin: 0 0 6px !important;
-}
-
-body.vtt-craft-core-enabled #sidebar #chat > :is(#chat-log, .chat-log) {
-  box-sizing: border-box !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  direction: rtl !important;
-  scrollbar-gutter: auto !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-
-body.vtt-craft-core-enabled #sidebar #chat > :is(#chat-log, .chat-log) > :is(.chat-message, .vtt-craft-chat-message) {
-  direction: ltr !important;
-  inline-size: 100% !important;
-  max-inline-size: 100% !important;
-  margin: 0 0 6px !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) :is(.message-header, .message-content, .chat-card, .dnd5e2.chat-card, .message-content > .dnd5e2, .midi-qol-card, .midi-qol-item-card, .midi-qol-attack-card, .midi-qol-damage-card, .midi-qol-save-card, .card, .item-card, .dice-roll, .dice-tooltip, .roll-tooltip, .card-content, .card-header, .card-footer, .card-buttons, .card-section, .card-section-header) {
-  box-sizing: border-box !important;
-  max-inline-size: 100% !important;
-  min-inline-size: 0 !important;
-  border-color: rgba(82, 72, 54, 0.35) !important;
-  background: transparent !important;
-  background-image: none !important;
-  color: var(--vtt-craft-text-dark) !important;
-  text-shadow: none !important;
-  box-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) .message-content {
-  inline-size: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: visible !important;
-  overflow-wrap: anywhere !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) :is(p, span, div, li, td, th, label, small, em, strong, h1, h2, h3, h4, h5, h6):not(.fa):not(.fas):not(.far):not(.fab):not([class^="fa-"]):not([class*=" fa-"]) {
-  color: var(--vtt-craft-text-dark) !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) :is(a, .message-sender, .message-metadata, .flavor-text, .subtitle, time, .message-header a, .card-title, .name-stacked .title, .item-name, .item-summary, .target, .targets, .pills .pill, .pill, .tag, .tags span) {
-  color: #3c3020 !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) :is(.dice-formula, .dice-total, .roll-total, .roll-result, .attack-roll, .damage-roll, .dice-result, .dice-tooltip .total) {
-  background: rgba(0, 0, 0, 0.14) !important;
-  border-color: rgba(82, 72, 54, 0.75) !important;
-  color: var(--vtt-craft-text-dark) !important;
-  text-align: center !important;
-  text-shadow: none !important;
-}
-
-body.vtt-craft-core-enabled :is(.chat-message, .vtt-craft-chat-message) :is(.message-metadata button, .message-delete, .message-metadata a, .message-metadata [role="button"], .message-metadata [data-action]) {
-  inline-size: auto !important;
-  block-size: auto !important;
-  min-inline-size: 0 !important;
-  min-block-size: 0 !important;
-  padding: 0 !important;
+/* Paint the panel independently of its native scroll container. The rail is on
+   the right in popouts and on the left in Foundry's RTL sidebar scroll area. */
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar:not(.sidebar-popout), .chat-sidebar.sidebar-popout > .window-content, #chat-popout > .window-content) {
+  --vtt-craft-chat-rail-left: 0px;
+  --vtt-craft-chat-rail-right: var(--vtt-craft-chat-rail);
+  position: relative;
+  isolation: isolate;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: var(--vtt-craft-chat-panel-inset) 0;
   border: 0 !important;
   border-image: none !important;
-  background: transparent !important;
-  color: #3c3020 !important;
-  font-family: inherit !important;
-  line-height: 1 !important;
-  text-shadow: none !important;
+  background: none !important;
   box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled #sidebar #chat {
+  --vtt-craft-chat-rail-left: var(--vtt-craft-chat-rail);
+  --vtt-craft-chat-rail-right: 0px;
+  border: 0 !important;
+  border-image: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar:not(.sidebar-popout), .chat-sidebar.sidebar-popout > .window-content, #chat-popout > .window-content)::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--vtt-craft-chat-rail-right) 0 var(--vtt-craft-chat-rail-left);
+  z-index: -1;
+  box-sizing: border-box;
+  border: var(--vtt-craft-chat-panel-frame) solid transparent;
+  border-image: var(--vtt-craft-frame-image) var(--vtt-craft-sidebar-frame-slice) stretch;
+  background: var(--vtt-craft-chat-panel-background);
+  background-color: var(--vtt-craft-chat-panel-fill);
+  background-clip: padding-box;
+  pointer-events: none;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled.vtt-craft-chat-background :is(.chat-sidebar:not(.sidebar-popout), .chat-sidebar.sidebar-popout > .window-content, #chat-popout > .window-content)::before {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* A popout keeps its window chrome. Notification chat keeps its native grid. */
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar.sidebar-popout, #chat-popout, #chat-notifications) {
+  background: none;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled #chat-notifications .overflow {
+  background: var(--vtt-craft-chat-panel-background);
+  background-color: var(--vtt-craft-chat-panel-fill);
+  background-clip: content-box;
+  scrollbar-gutter: stable;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar :is(.chat-scroll, .chat-log, .chat-form, #chat-controls, #chat-message),
+body.vtt-craft-active.vtt-craft-core-enabled .chat-popout :is(.message-content, .chat-message) {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar .chat-scroll {
+  min-block-size: 0;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar .chat-log {
+  margin: 0;
+  /* Thin scrollbar widths vary outside Chromium; reserve enough paint clearance. */
+  padding-left: calc(var(--vtt-craft-chat-panel-inset) + var(--vtt-craft-chat-rail-left, 0px));
+  padding-right: calc(var(--vtt-craft-chat-panel-inset) + var(--vtt-craft-chat-rail-right, 0px));
+}
+
+/* Chromium's native 12px track provides a 6px thumb plus drag clearance.
+   Other browsers retain their native thin scrollbar. No custom scroll owner. */
+@supports selector(::-webkit-scrollbar) {
+  body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar .chat-scroll, #chat-notifications .overflow) {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar .chat-scroll, #chat-notifications .overflow)::-webkit-scrollbar {
+    width: var(--vtt-craft-chat-rail);
+  }
+
+  body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar .chat-scroll, #chat-notifications .overflow)::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar .chat-scroll, #chat-notifications .overflow)::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background: var(--color-scrollbar);
+    background-clip: padding-box;
+  }
+
+  body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar .chat-log {
+    padding: 0 var(--vtt-craft-chat-panel-inset);
+  }
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar .chat-form {
+  inline-size: 100%;
+  padding-inline: calc(var(--vtt-craft-chat-panel-inset) + var(--vtt-craft-chat-rail-left, 0px))
+    calc(var(--vtt-craft-chat-panel-inset) + var(--vtt-craft-chat-rail-right, 0px));
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled #chat-popout #chat-controls {
+  padding-inline: 0;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar #chat-controls {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .chat-sidebar #chat-controls .control-buttons {
+  flex-wrap: wrap;
+  gap: 4px;
+  min-inline-size: 0;
+}
+
+/* Paint native toolbar buttons without changing their size or visibility. */
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar, #chat-notifications) #chat-controls :is(button, a.ui-control, select):not(.unbutton),
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar, #chat-notifications) #message-modes .ui-control {
+  border-image: var(--vtt-craft-small-button-image) var(--vtt-craft-small-button-slice) fill stretch;
+  color: var(--vtt-craft-text-light);
+  text-shadow: 0 1px 2px #000;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar, #chat-notifications) #chat-controls :is(button, a.ui-control, select):is(:hover, :focus-visible, .active, [aria-pressed="true"]),
+body.vtt-craft-active.vtt-craft-core-enabled :is(.chat-sidebar, #chat-notifications) #message-modes .ui-control:is(:hover, :focus-visible, .active, [aria-pressed="true"]) {
+  border-image-source: var(--vtt-craft-small-button-image-hover);
+  color: var(--vtt-craft-pill-text-active);
+}
+
+/* One sliced parchment at the actual message root. The rim has no layout cost.
+   Capture the native palette here, before neutral text tokens change in content. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message {
+  --vtt-craft-chat-native-primary: var(--color-text-primary);
+  --vtt-craft-chat-native-secondary: var(--color-text-secondary);
+  --vtt-craft-chat-native-tertiary: var(--color-text-tertiary);
+  --vtt-craft-chat-native-emphatic: var(--color-text-emphatic);
+  --vtt-craft-chat-native-button-text: var(--button-text-color);
+  --vtt-craft-chat-native-button-hover-text: var(--button-hover-text-color);
+  --vtt-craft-chat-native-button-background: var(--dnd5e-chat-button-background);
+  --vtt-craft-chat-native-button-border: var(--dnd5e-chat-button-border);
+  --vtt-craft-chat-native-pill-text: var(--pill-transparent-color);
+  --vtt-craft-chat-native-roll-icon-filter: var(--dnd5e-roll-icon-filter, none);
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  margin: 0 0 var(--vtt-craft-chat-gap);
+  padding: var(--vtt-craft-chat-inset) !important;
+  border: 0;
+  border-image: none;
+  border-radius: 0;
+  background: none;
+  color: var(--vtt-craft-text-dark);
+  text-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  box-sizing: border-box;
+  border: var(--vtt-craft-chat-inset) solid transparent;
+  border-image: var(--vtt-craft-parchment) var(--vtt-craft-parchment-slice) fill stretch;
+  filter: var(--vtt-craft-parchment-filter);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Retain native message-mode cues after replacing the layout border. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message.whisper { --vtt-craft-chat-mode-color: var(--color-whisper-border, #6b5cff); }
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message.blind { --vtt-craft-chat-mode-color: var(--color-blind-border, #c12fc1); }
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message.emote { --vtt-craft-chat-mode-color: var(--color-emote-border, #e5af29); }
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message.whisper { --vtt-craft-chat-mode-color: #6b5cff; }
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message.blind { --vtt-craft-chat-mode-color: #c12fc1; }
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message.emote { --vtt-craft-chat-mode-color: #e5af29; }
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message:is(.whisper, .blind, .emote)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(var(--vtt-craft-chat-mode-color), var(--vtt-craft-chat-mode-color))
+    center bottom 2px / calc(100% - 2 * var(--vtt-craft-chat-inset)) 2px no-repeat;
+  pointer-events: none;
+}
+
+/* Set neutral text at content boundaries, never on every descendant. Native
+   critical/failure/healing/target styles and authored content retain precedence. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > :is(.message-header, .message-content) {
+  --color-text-primary: var(--vtt-craft-text-dark);
+  --color-text-secondary: var(--vtt-craft-paper-secondary);
+  --color-text-tertiary: var(--vtt-craft-paper-tertiary);
+  --color-text-emphatic: var(--vtt-craft-text-dark);
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--color-text-primary);
+  text-shadow: none;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-header :is(.message-sender, .message-metadata, .whisper-to, .flavor-text) {
+  min-inline-size: 0;
+  color: var(--color-text-secondary);
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-header {
+  column-gap: 4px;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-header .message-sender {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-header .message-metadata {
+  flex: 0 0 auto;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-header .message-metadata :is(a, button) {
+  color: inherit;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message > .message-content {
+  overflow-wrap: anywhere;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message > .message-content {
+  --pill-transparent-color: var(--vtt-craft-paper-secondary);
+  --button-text-color: var(--vtt-craft-text-dark);
+  --button-hover-text-color: var(--vtt-craft-text-dark);
+  --dnd5e-chat-button-background: rgba(80, 60, 35, 0.08);
+  --dnd5e-chat-button-border: rgba(82, 72, 54, 0.45);
+  --dnd5e-chat-description-background: rgba(80, 60, 35, 0.04);
+  --dnd5e-roll-icon-filter: none;
+  padding: 0;
+}
+
+/* A popover or native application tray keeps its original palette and surface.
+   Otherwise dark system surfaces would inherit parchment-colored text tokens. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .message-content :is([popover], .card-tray, damage-application, midi-damage-application, effect-application) {
+  --color-text-primary: var(--vtt-craft-chat-native-primary);
+  --color-text-secondary: var(--vtt-craft-chat-native-secondary);
+  --color-text-tertiary: var(--vtt-craft-chat-native-tertiary);
+  --color-text-emphatic: var(--vtt-craft-chat-native-emphatic);
+  --button-text-color: var(--vtt-craft-chat-native-button-text);
+  --button-hover-text-color: var(--vtt-craft-chat-native-button-hover-text);
+  --dnd5e-chat-button-background: var(--vtt-craft-chat-native-button-background);
+  --dnd5e-chat-button-border: var(--vtt-craft-chat-native-button-border);
+  --pill-transparent-color: var(--vtt-craft-chat-native-pill-text);
+  --dnd5e-roll-icon-filter: var(--vtt-craft-chat-native-roll-icon-filter);
+  color: var(--color-text-primary);
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .message-content :is(.card-tray, damage-application, midi-damage-application, effect-application) {
+  background: var(--dnd5e-chat-background);
+}
+
+/* Use native chat surface tokens rather than Midi's dark card fill. Roll-state
+   tokens/inline colors, disabled text and semantic child icons remain native. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .midi-buttons button {
+  background: var(--button-background-color);
+  border-color: var(--button-border-color);
+  color: var(--button-text-color);
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .midi-buttons button:not(.dice-roll) > span {
+  color: inherit;
+  text-shadow: inherit;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .midi-buttons button:not(.dice-roll):is(:hover, :focus-visible):not(:disabled) {
+  background: var(--button-hover-background-color);
+  color: var(--button-hover-text-color);
+}
+
+/* Condensed roll columns can stack at narrow widths or larger text scales. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .midi-results > .flexrow > :is(.midi-qol-attack-roll, .midi-qol-damage-roll) {
+  flex: 1 1 8rem;
+  min-inline-size: 0;
+}
+
+/* Native D&D and Midi QOL trays share these edge-to-edge margins. Contain only
+   their outer geometry; native disclosure, wrapper padding and colors remain. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .message-content :is(.card-tray, .card-summary, .deltas, .rest-card .bastion, .time-passed-card .bastion) {
+  margin: 4px 0 0;
+}
+
+/* v6 card rows retain system gaps, icon sizes, disclosure and action behavior. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .message-content :is(.chat-card, .card-header, .name-stacked, .icon-row, .icon-row > ul, .card-summary, recorded-targets, damage-application, midi-damage-application, effect-application) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .message-content .name-stacked :is(.title, .subtitle) {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message.compact .card-description {
+  margin-inline: 0;
+  padding-inline: var(--vtt-craft-chat-inset);
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message.compact .icon-row > i {
+  flex-shrink: 0;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .pills :is(.pill, target-pill) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .pills :is(.label, target-pill > label) {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message target-pill[data-value]::after {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-dnd5e-chat-message .card-buttons > button:not(.icon) {
+  block-size: auto;
+  min-block-size: var(--button-size, 24px);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Legacy stored cards use their native layout, with only a neutral roll fill. */
+body.vtt-craft-active.vtt-craft-core-enabled .vtt-craft-chat-message:not(.compact) :is(.dice-formula, .dice-total) {
+  background-color: rgba(80, 60, 35, 0.07);
+}
+
+/* Parchment 2/3 readability stays local to the module's painted paper. Native
+   surfaces capture their original palette above and retain their own tokens. */
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) :is(.vtt-craft-chat-message, .dnd5e2.vtt-craft-item-sheet .item-descriptions .description) {
+  --vtt-craft-text-dark: #18140f;
+  --vtt-craft-paper-secondary: #21190f;
+  --vtt-craft-paper-tertiary: #21190f;
+  --vtt-craft-paper-icon: #3e2d18;
+  --vtt-craft-paper-outline: #3e2d18;
+}
+
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message .card-header .activity-icon:not(:is([popover], .card-tray, damage-application, midi-damage-application, effect-application) *) {
+  --activity-icon-color: var(--vtt-craft-paper-icon);
+}
+
+/* Target only neutral type/section icons. The .icons roll-state slot, target
+   pills, portraits and item artwork continue to use system-owned colors. */
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message .icon-row > i:not(:is([popover], .card-tray, damage-application, midi-damage-application, effect-application, .success, .failure, .critical, .fumble, .healing, [aria-disabled="true"], [inert]) *) {
+  color: var(--vtt-craft-paper-icon);
+}
+
+/* Preserve native dimensions, fills and semantic result borders. These rules
+   change only the outline of active controls directly over the paper. */
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message .message-content :is(.card-buttons > button, .midi-buttons button, button.dice-roll, .dice-result .dice-total):not(:disabled):not([aria-disabled="true"]):not(.success, .failure, .critical, .fumble, .healing):not(:is([popover], .card-tray, .card-summary, damage-application, midi-damage-application, effect-application, .success, .failure, .critical, .fumble, .healing, [aria-disabled="true"], [inert]) *) {
+  --button-border-color: var(--vtt-craft-paper-outline);
+  --button-hover-border-color: var(--vtt-craft-paper-outline);
+  border-color: var(--vtt-craft-paper-outline);
+}
+
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message button.dice-roll:not(:disabled):not([aria-disabled="true"]):not(.success, .failure, .critical, .fumble, .healing):not(:is([popover], .card-tray, .card-summary, damage-application, midi-damage-application, effect-application, .success, .failure, .critical, .fumble, .healing, [aria-disabled="true"], [inert]) *) .result > .total {
+  border-color: var(--vtt-craft-paper-outline);
+}
+
+/* Midi's damage-type glyphs use a separate slot from critical/fumble markers.
+   Keep disabled controls and native dark trays at their original opacity. */
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message .dice-result .dice-total > .midi-damage-icons:not(:is([popover], .card-tray, damage-application, midi-damage-application, effect-application, .success, .failure, .critical, .fumble, .healing, :disabled, [aria-disabled="true"], [inert]) *) {
+  opacity: 1;
+}
+
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .vtt-craft-dnd5e-chat-message .midi-damage-type-icon:not(:is([popover], .card-tray, damage-application, midi-damage-application, effect-application, .success, .failure, .critical, .fumble, .healing, :disabled, [aria-disabled="true"], [inert]) *) {
+  --icon-fill: var(--vtt-craft-paper-icon);
+}
+
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .dnd5e2.vtt-craft-item-sheet .item-descriptions .description.collapsible > .header::before,
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .dnd5e2.vtt-craft-item-sheet .item-descriptions .description > .header > button:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--vtt-craft-paper-icon);
+}
+
+body.vtt-craft-active:is(.vtt-craft-parchment-parchment2, .vtt-craft-parchment-parchment3) .dnd5e2.vtt-craft-item-sheet .item-descriptions .description :is(.editor-content, .ProseMirror) :is(a.inline-roll, a.roll-link, a.content-link:not(.broken)) > i:not([style]):not(:is(.editor-menu, .menu-container, [popover]) *) {
+  color: var(--vtt-craft-paper-icon);
 }
 
 /* --------------------------------------------------------------------------
@@ -1678,9 +1899,9 @@ body.vtt-craft-core-enabled :is(#hotbar, .hotbar) :is(#action-bar, .action-bar):
   pointer-events: none !important;
   position: absolute !important;
   content: "" !important;
-  inset: -12px -18px -16px !important;
-  border: 12px solid transparent !important;
-  border-image: var(--vtt-craft-frame-image) var(--vtt-craft-frame-slice) repeat !important;
+  inset: -4px -4px -6px !important;
+  border: 6px solid transparent !important;
+  border-image: var(--vtt-craft-frame-image) var(--vtt-craft-frame-slice) stretch !important;
   background: var(--vtt-craft-framed-surface-background) !important;
   background-origin: var(--vtt-craft-framed-surface-background-origin) !important;
   background-color: var(--vtt-craft-chrome-overlay) !important;
@@ -1689,37 +1910,24 @@ body.vtt-craft-core-enabled :is(#hotbar, .hotbar) :is(#action-bar, .action-bar):
   z-index: -1 !important;
 }
 
-body.vtt-craft-core-enabled :is(#hotbar, .hotbar) :is(#action-bar, .action-bar)::after {
-  pointer-events: none !important;
-  position: absolute !important;
-  content: "" !important;
-  left: -10px !important;
-  right: -10px !important;
-  bottom: -15px !important;
-  height: 18px !important;
-  border-bottom: 18px solid transparent !important;
-  border-image: var(--vtt-craft-border-trim) 0 0 100% 0 repeat !important;
-  z-index: 0 !important;
-}
-
 body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::before,
 body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::after {
   pointer-events: none !important;
   position: absolute !important;
   content: "" !important;
-  inline-size: clamp(92px, 9vw, 128px) !important;
-  block-size: clamp(92px, 9vw, 128px) !important;
+  inline-size: clamp(64px, 6vw, 88px) !important;
+  block-size: clamp(64px, 6vw, 88px) !important;
   bottom: calc(-1 * clamp(18px, 1.8vw, 30px)) !important;
   background: var(--vtt-craft-griffon) center / contain no-repeat !important;
   z-index: -1 !important;
 }
 
 body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::before {
-  left: calc(-1 * clamp(92px, 8vw, 118px)) !important;
+  left: calc(-1 * clamp(64px, 6vw, 88px)) !important;
 }
 
 body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::after {
-  right: calc(-1 * clamp(92px, 8vw, 118px)) !important;
+  right: calc(-1 * clamp(64px, 6vw, 88px)) !important;
   transform: scaleX(-1) !important;
 }
 
@@ -1774,13 +1982,6 @@ body.vtt-craft-core-enabled #players {
   color: var(--vtt-craft-text-gold) !important;
 }
 
-body.vtt-craft-core-enabled #players h3 { display: none; }
-
-body.vtt-craft-core-enabled #players .player {
-  color: var(--vtt-craft-text-gold);
-  text-shadow: 1px 1px 2px #000;
-}
-
 /* --------------------------------------------------------------------------
    Scaling guardrails
    -------------------------------------------------------------------------- */
@@ -1788,6 +1989,46 @@ body.vtt-craft-core-enabled #players .player {
 @media (max-width: 720px) {
   body.vtt-craft-core-enabled {
     --vtt-craft-control-size: clamp(30px, var(--control-size, 34px), 38px);
-    --vtt-craft-chat-toolbar-button-size: 24px;
   }
+}
+
+/* Keyboard focus is visible on both artwork and native dark control surfaces.
+   No display rule changes native hidden/inert/disabled control behavior. */
+
+body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui) :is(button, a[href], input, select, textarea, summary, [role="button"], [tabindex]):focus-visible,
+/* Verified HUD roots keep native palettes and dimensions; share only the
+   keyboard-focus treatment. Their own custom themes and state colors win. */
+body.vtt-craft-core-enabled :is(#token-action-hud-app, #visual-active-effects, #calendaria-hud, #calendaria-mini-cal) :is(button, a[href], [tabindex]):focus-visible:not(:disabled, [disabled], [aria-disabled="true"]):not(:where([inert], [aria-disabled="true"]) *),
+body.vtt-craft-active.vtt-craft-core-enabled :is(.vtt-craft-chat-message, .chat-form, #chat-notifications #chat-controls) :is(button, select, a[href], [tabindex="0"]):focus-visible,
+body.vtt-craft-active .vtt-craft-item-sheet .item-descriptions .description :is(a, [tabindex="0"]):focus-visible,
+body.vtt-craft-core-enabled :is(.vtt-craft-core-control-button, .vtt-craft-sidebar-tab-button, #hotbar button, #hotbar .slot, #players button):focus-visible {
+  outline: 2px solid var(--vtt-craft-focus-light) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--vtt-craft-focus-dark) !important;
+}
+
+/* Preserve Foundry's player identity dots, idle/self cues and performance stats. */
+
+body.vtt-craft-core-enabled #players :is(#players-active, #players-inactive) {
+  --player-name-color: var(--vtt-craft-text-light);
+  --player-name-idle-color: #bcb8b0;
+  --player-name-self-color: var(--vtt-craft-text-gold);
+  background: var(--vtt-craft-chrome-overlay);
+  border-color: var(--vtt-craft-pill-border-color);
+  text-shadow: 0 1px 2px #000;
+}
+
+/* Faction artwork is decorative; compact hotbars need space for real controls. */
+
+body.vtt-craft-core-enabled #hotbar:is(.compact, .sm, .md.offset)::before,
+body.vtt-craft-core-enabled #hotbar:is(.compact, .sm, .md.offset)::after { content: none !important; }
+
+@media (max-width: 1200px) {
+  body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::before,
+  body.vtt-craft-core-enabled :is(#hotbar, .hotbar)::after { content: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.vtt-craft-active .vtt-craft-application:not(.vtt-craft-core-ui) :is(button, a.button),
+  body.vtt-craft-core-enabled :is(.vtt-craft-core-control-button, .vtt-craft-sidebar-tab-button, #hotbar .slot) { transition: none; }
 }
