@@ -19,7 +19,7 @@ function Invoke-ReleaseCommand {
   $commandOutput = & $Command @Arguments 2>&1
   $commandExitCode = $LASTEXITCODE
   $ErrorActionPreference = "Stop"
-  $commandText = ($commandOutput | Out-String).Trim()
+  $commandText = (($commandOutput | ForEach-Object { $_.ToString() }) -join [Environment]::NewLine).Trim()
   if ($commandExitCode -ne 0) {
     throw "$Command failed (exit $commandExitCode).`n$commandText"
   }
